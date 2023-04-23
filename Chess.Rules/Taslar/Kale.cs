@@ -12,7 +12,7 @@ namespace Chess.Rules.Taslar
     {
         public Kale()
         {
-
+           
         }
 
         public Renk Renk { get ; set ; }
@@ -119,13 +119,23 @@ namespace Chess.Rules.Taslar
             {
                 if((kare.Koordinat.X == 1 && kare.Koordinat.Y == 1) || (kare.Koordinat.X == 8 && kare.Koordinat.Y == 1))
                 {
-                    kare.Tas = new Kale { Renk = Renk.Beyaz, Resim = Environment.CurrentDirectory + @"\..\..\Resimler\kale.png" };
-                    kare.Button.Image = Image.FromFile(Environment.CurrentDirectory + @"\..\..\Resimler\kale.png");
+                    //kare.Tas = new Kale { Renk = Renk.Beyaz, Resim = Environment.CurrentDirectory + @"\..\..\Resimler\kale.png" };
+                    //kare.Button.Image = Image.FromFile(Environment.CurrentDirectory + @"\..\..\Resimler\kale.png");
+                    kare.Tas = new Kale { Renk = Renk.Siyah, Resim = Environment.CurrentDirectory + @"\..\..\Resimler\kale (2).png" };
+                    kare.Button.Image = Image.FromFile(Environment.CurrentDirectory + @"\..\..\Resimler\kale (2).png");
 
                     return kare;
                 }
 
                 // TODO: Siyah iki kale (1,8) ve (8,8) kordinatlarına yerleştirilecek.
+            }
+            foreach (Kare kare in kareler)
+            {
+                if((kare.Koordinat.X ==1 && kare.Koordinat.Y == 8) || (kare.Koordinat.X == 8 && kare.Koordinat.Y == 8))
+                {
+                    kare.Tas = new Kale { Renk = Renk.Siyah, Resim = Environment.CurrentDirectory + @"\..\..\Resimler\kale (2).png" };
+                    kare.Button.Image = Image.FromFile(Environment.CurrentDirectory + @"\..\..\Resimler\kale (2).png");
+                }
             }
 
             return null;
