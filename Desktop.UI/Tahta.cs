@@ -38,8 +38,8 @@ namespace Desktop.UI
 
         private void TahtayıYarat()
         {
-            int x = 0;
-            int y = 0;
+            int x = 0; //butonları düzgün yerşeltirmek için (x-y) değişkenleri kullandık
+            int y = 0; //butonları düzgün yerşeltirmek için (x-y) değişkenleri kullandık
             for (int i = 1; i < 9; i++)
             {
 
