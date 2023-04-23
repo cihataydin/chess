@@ -10,21 +10,33 @@ namespace Chess.Rules.Taslar
 {
     public class Kale : ITas
     {
-        public Kale()
-        {
-           
-        }
-
         public Renk Renk { get ; set ; }
         public string Resim { get; set; }
 
-        public void HareketEt()
+        public bool HareketEt(Kare baslangıcKare, Kare hedefKare, List<Kare> kareler)
         {
-            throw new NotImplementedException();
+            List<Kare> uygunKareler = UygunKareleriHesapla(baslangıcKare.Koordinat, kareler);
+
+            bool hareketEdilebilir = uygunKareler.Contains(hedefKare);
+
+            if (hareketEdilebilir)
+            {
+                ITas tas = baslangıcKare.Tas;
+
+                baslangıcKare.Tas = null;
+                baslangıcKare.Durum = KareDurum.Bos;
+                baslangıcKare.Button.Image = null;
+
+                hedefKare.Tas = tas;
+                hedefKare.Durum = KareDurum.Dolu;
+                hedefKare.Button.Image = Image.FromFile(Resim);
+            }
+
+            return hareketEdilebilir;
         }
-        public List<Koordinat> UygunKareleriHesapla(Koordinat koordinat, List<Kare> kareler)
+        public List<Kare> UygunKareleriHesapla(Koordinat koordinat, List<Kare> kareler)
         {
-            List<Koordinat> koordinatlar = new List<Koordinat>();
+            List<Kare> koordinatlar = new List<Kare>();
 
             for (int i = koordinat.Y + 1; i < 9; i++)
             {
@@ -32,11 +44,11 @@ namespace Chess.Rules.Taslar
 
                 if(kare.Tas is null)
                 {
-                    koordinatlar.Add(kare.Koordinat);
+                    koordinatlar.Add(kare);
                 }
                 else if(kare.Tas != null && kare.Tas.Renk != this.Renk)
                 {
-                    koordinatlar.Add(kare.Koordinat);
+                    koordinatlar.Add(kare);
                     break;
                 }
                 else if (kare.Tas != null && kare.Tas.Renk == this.Renk)
@@ -53,11 +65,11 @@ namespace Chess.Rules.Taslar
 
                 if (kare.Tas is null)
                 {
-                    koordinatlar.Add(kare.Koordinat);
+                    koordinatlar.Add(kare);
                 }
                 else if (kare.Tas != null && kare.Tas.Renk != this.Renk)
                 {
-                    koordinatlar.Add(kare.Koordinat);
+                    koordinatlar.Add(kare);
                     break;
                 }
                 else if (kare.Tas != null && kare.Tas.Renk == this.Renk)
@@ -74,11 +86,11 @@ namespace Chess.Rules.Taslar
 
                 if (kare.Tas is null)
                 {
-                    koordinatlar.Add(kare.Koordinat);
+                    koordinatlar.Add(kare);
                 }
                 else if (kare.Tas != null && kare.Tas.Renk != this.Renk)
                 {
-                    koordinatlar.Add(kare.Koordinat);
+                    koordinatlar.Add(kare);
                     break;
                 }
                 else if (kare.Tas != null && kare.Tas.Renk == this.Renk)
@@ -95,11 +107,11 @@ namespace Chess.Rules.Taslar
 
                 if (kare.Tas is null)
                 {
-                    koordinatlar.Add(kare.Koordinat);
+                    koordinatlar.Add(kare);
                 }
                 else if (kare.Tas != null && kare.Tas.Renk != this.Renk)
                 {
-                    koordinatlar.Add(kare.Koordinat);
+                    koordinatlar.Add(kare);
                     break;
                 }
                 else if (kare.Tas != null && kare.Tas.Renk == this.Renk)
@@ -113,34 +125,24 @@ namespace Chess.Rules.Taslar
             return koordinatlar; 
         }
 
-        public static Kare Yerlestir(List<Kare> kareler)
+        public static void Yerlestir(List<Kare> kareler)
         {
             foreach (Kare kare in kareler)
             {
                 if((kare.Koordinat.X == 1 && kare.Koordinat.Y == 1) || (kare.Koordinat.X == 8 && kare.Koordinat.Y == 1))
                 {
-                    //kare.Tas = new Kale { Renk = Renk.Beyaz, Resim = Environment.CurrentDirectory + @"\..\..\Resimler\kale.png" };
-                    //kare.Button.Image = Image.FromFile(Environment.CurrentDirectory + @"\..\..\Resimler\kale.png");
-                    kare.Tas = new Kale { Renk = Renk.Siyah, Resim = Environment.CurrentDirectory + @"\..\..\Resimler\kale (2).png" };
-                    kare.Button.Image = Image.FromFile(Environment.CurrentDirectory + @"\..\..\Resimler\kale (2).png");
-
-                    return kare;
+                    kare.Tas = new Kale { Renk = Renk.Beyaz, Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZ_KALE}" };
+                    kare.Button.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.BEYAZ_KALE}");
+                    kare.Durum = KareDurum.Dolu;
                 }
 
-                // TODO: Siyah iki kale (1,8) ve (8,8) kordinatlarına yerleştirilecek.
-            }
-            foreach (Kare kare in kareler)
-            {
-                if((kare.Koordinat.X ==1 && kare.Koordinat.Y == 8) || (kare.Koordinat.X == 8 && kare.Koordinat.Y == 8))
+                if ((kare.Koordinat.X == 1 && kare.Koordinat.Y == 8) || (kare.Koordinat.X == 8 && kare.Koordinat.Y == 8))
                 {
-                    kare.Tas = new Kale { Renk = Renk.Siyah, Resim = Environment.CurrentDirectory + @"\..\..\Resimler\kale (2).png" };
-                    kare.Button.Image = Image.FromFile(Environment.CurrentDirectory + @"\..\..\Resimler\kale (2).png");
+                    kare.Tas = new Kale { Renk = Renk.Siyah, Resim = $"{Environment.CurrentDirectory}{TasResimleri.SIYAH_KALE}" };
+                    kare.Button.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.SIYAH_KALE}");
+                    kare.Durum = KareDurum.Dolu;
                 }
             }
-
-            return null;
-
-            // TODO: test için dönüş tipi değiştirilmiştir. Düzeltilecek.
         }
     }
 }

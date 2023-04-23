@@ -31,9 +31,7 @@ namespace Desktop.UI
 
         private void TaslarıYarat()
         {
-            Kare kare = Kale.Yerlestir(this.Kareler);
-
-            kare.Tas.UygunKareleriHesapla(kare.Koordinat, this.Kareler);
+            Kale.Yerlestir(this.Kareler);
         }
 
         private void TahtayıYarat()
@@ -56,11 +54,6 @@ namespace Desktop.UI
                     {
                         ResmiDuzenle(sender, e, button);
                     };
-
-                    if (i == 1 && j == 1)
-                    {
-                        button.Image = Image.FromFile(Environment.CurrentDirectory + @"\..\..\Resimler\kale.png");
-                    }
 
                     if (j % 2 == 0)
                     {
@@ -107,6 +100,8 @@ namespace Desktop.UI
 
         }
 
+        // TODO: Bu metot artık sadece button resimlerini değiştirmiyor. Ekstra olarak karelerdeki durumları güncelleyip taşların yerini değiştiriyor.
+        // Yeni isim vermeliyiz. İsmi TasıHareketEttir olsun.
         private void ResmiDuzenle(object sender, EventArgs e, Button button)
         {
             if (Sayac == 0)
@@ -126,8 +121,10 @@ namespace Desktop.UI
 
                     if (oncekiButon.AccessibleName == Konum && oncekiButon.Image != null && button.AccessibleName != oncekiButon.AccessibleName)
                     {
-                        button.Image = Image.FromFile(Environment.CurrentDirectory + @"\..\..\Resimler\kale.png");
-                        oncekiButon.Image = null;
+                        Kare oncekiKare = Kareler.Where(kare => kare.Button.Equals(oncekiButon)).FirstOrDefault();
+                        Kare hedefKare = Kareler.Where(kare => kare.Button.Equals(button)).FirstOrDefault();
+
+                        oncekiKare.Tas.HareketEt(oncekiKare, hedefKare, this.Kareler);
 
                         break;
                     }

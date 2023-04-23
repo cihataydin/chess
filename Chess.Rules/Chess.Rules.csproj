@@ -48,7 +48,8 @@
     <Compile Include="Sabitler\KareDurum.cs" />
     <Compile Include="Sabitler\Koordinat.cs" />
     <Compile Include="Sabitler\Renk.cs" />
-    <Compile Include="Tas.cs" />
+    <Compile Include="Sabitler\TasResimleri.cs" />
+    <Compile Include="ITas.cs" />
     <Compile Include="Taslar\Kale.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
