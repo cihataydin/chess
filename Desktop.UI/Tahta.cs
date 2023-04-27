@@ -101,8 +101,6 @@ namespace Desktop.UI
 
         }
 
-        // TODO: Bu metot artık sadece button resimlerini değiştirmiyor. Ekstra olarak karelerdeki durumları güncelleyip taşların yerini değiştiriyor.
-        // Yeni isim vermeliyiz. İsmi TasıHareketEttir olsun.
         private void TasıHareketEttir(object sender, EventArgs e, Button button)
         {
             if (Sayac == 0)
