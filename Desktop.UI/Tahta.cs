@@ -28,10 +28,13 @@ namespace Desktop.UI
             TahtayıYarat();
             TaslarıYarat();
         }
-
+        
         private void TaslarıYarat()
         {
             Kale.Yerlestir(this.Kareler);
+            Fil.Yerlestir(this.Kareler);
+            
+            
         }
 
         private void TahtayıYarat()
@@ -52,7 +55,7 @@ namespace Desktop.UI
 
                     button.Click += delegate (object sender, EventArgs e)
                     {
-                        ResmiDuzenle(sender, e, button);
+                        TasıHareketEttir(sender, e, button);
                     };
 
                     if (j % 2 == 0)
@@ -102,7 +105,7 @@ namespace Desktop.UI
 
         // TODO: Bu metot artık sadece button resimlerini değiştirmiyor. Ekstra olarak karelerdeki durumları güncelleyip taşların yerini değiştiriyor.
         // Yeni isim vermeliyiz. İsmi TasıHareketEttir olsun.
-        private void ResmiDuzenle(object sender, EventArgs e, Button button)
+        private void TasıHareketEttir(object sender, EventArgs e, Button button)
         {
             if (Sayac == 0)
             {
