@@ -56,7 +56,6 @@ namespace Chess.Rules.Taslar
                     break;
                 }
 
-                // TODO: Yeniden Düzenle ve kısalt
             }
 
             for (int i = koordinat.Y - 1; i > 0; i--)
@@ -77,7 +76,7 @@ namespace Chess.Rules.Taslar
                     break;
                 }
 
-                // TODO: Yeniden Düzenle ve kısalt
+               
             }
 
             for (int i = koordinat.X + 1; i < 9; i++)
@@ -98,7 +97,7 @@ namespace Chess.Rules.Taslar
                     break;
                 }
 
-                // TODO: Yeniden Düzenle ve kısalt
+                
             }
 
             for (int i = koordinat.X - 1; i > 0; i--)
@@ -119,7 +118,7 @@ namespace Chess.Rules.Taslar
                     break;
                 }
 
-                // TODO: Yeniden Düzenle ve kısalt
+            
             }
 
             return koordinatlar; 
