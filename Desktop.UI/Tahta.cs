@@ -32,9 +32,7 @@ namespace Desktop.UI
         private void TaslarıYarat()
         {
             Kale.Yerlestir(this.Kareler);
-            Fil.Yerlestir(this.Kareler);
-            
-            
+            Fil.Yerlestir(this.Kareler); 
         }
 
         private void TahtayıYarat()
