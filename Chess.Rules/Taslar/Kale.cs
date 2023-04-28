@@ -74,9 +74,7 @@ namespace Chess.Rules.Taslar
                 else if (kare.Tas != null && kare.Tas.Renk == this.Renk)
                 {
                     break;
-                }
-
-               
+                } 
             }
 
             for (int i = koordinat.X + 1; i < 9; i++)
@@ -95,9 +93,7 @@ namespace Chess.Rules.Taslar
                 else if (kare.Tas != null && kare.Tas.Renk == this.Renk)
                 {
                     break;
-                }
-
-                
+                }             
             }
 
             for (int i = koordinat.X - 1; i > 0; i--)
@@ -117,8 +113,6 @@ namespace Chess.Rules.Taslar
                 {
                     break;
                 }
-
-            
             }
 
             return koordinatlar; 

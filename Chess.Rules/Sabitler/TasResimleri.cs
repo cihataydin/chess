@@ -12,5 +12,7 @@ namespace Chess.Rules.Sabitler
         public const string SIYAH_KALE = @"\..\..\Resimler\siyahkale.png";
         public const string BEYAZ_FIL = @"\..\..\Resimler\beyazfil.png";
         public const string SIYAH_FIL = @"\..\..\Resimler\siyahfil.png";
+        public const string BEYAZVEZIR = @"\..\..\Resimler\beyazvezir.png";
+        public const string SIYAHVEZIR = @"\..\..\Resimler\siyahvezi.jpg";
     }
 }
