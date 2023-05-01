@@ -52,6 +52,7 @@
     <Compile Include="ITas.cs" />
     <Compile Include="Taslar\Fil.cs" />
     <Compile Include="Taslar\Kale.cs" />
+    <Compile Include="Taslar\Sah.cs" />
     <Compile Include="Taslar\Vezir.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

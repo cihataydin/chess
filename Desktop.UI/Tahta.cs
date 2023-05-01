@@ -33,7 +33,8 @@ namespace Desktop.UI
         {
             Kale.Yerlestir(this.Kareler);
             Fil.Yerlestir(this.Kareler); 
-            Vezir.Yerlestir(this.Kareler);            
+            Vezir.Yerlestir(this.Kareler);
+            Sah.Yerlestir(this.Kareler);
         }
 
         private void TahtayıYarat()
