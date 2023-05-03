@@ -202,14 +202,14 @@ namespace Chess.Rules.Taslar
         {
             foreach(Kare kare in kareler)
             {
-                if ((kare.Koordinat.X == 4 && kare.Koordinat.Y == 1))
+                if ((kare.Koordinat.X == 5 && kare.Koordinat.Y == 1))
                 {
                     kare.Tas = new Vezir { Renk = Renk.Beyaz, Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZVEZIR}" };
                     kare.Button.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.BEYAZVEZIR}");
                     kare.Durum = KareDurum.Dolu;
                 }
 
-                if ((kare.Koordinat.X == 4 && kare.Koordinat.Y == 8))
+                if ((kare.Koordinat.X == 5 && kare.Koordinat.Y == 8))
                 {
                     kare.Tas = new Vezir { Renk = Renk.Siyah, Resim = $"{Environment.CurrentDirectory}{TasResimleri.SIYAHVEZIR}" };
                     kare.Button.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.SIYAHVEZIR}");

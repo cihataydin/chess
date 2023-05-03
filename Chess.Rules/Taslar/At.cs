@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Chess.Rules.Taslar
 {
-    public class Sah : ITas
+    public class At : ITas
     {
-        public string Resim { get; set; }
         public Renk Renk { get; set; }
+        public string Resim { get; set; }
 
         public bool HareketEt(Kare baslangıcKare, Kare hedefKare, List<Kare> kareler)
         {
@@ -39,48 +39,49 @@ namespace Chess.Rules.Taslar
         {
             List<Kare> _kareler = new List<Kare>();
 
-            Kare kare = kareler.Where(k => k.Koordinat.X == koordinat.X + 1 && k.Koordinat.Y == koordinat.Y + 1).FirstOrDefault();
+            Kare kare = kareler.Where(k => k.Koordinat.X == koordinat.X - 1 && k.Koordinat.Y == koordinat.Y + 2).FirstOrDefault();
             KareyiEkle(_kareler, kare);
 
-            kare = kareler.Where(k => k.Koordinat.X == koordinat.X + 1 && k.Koordinat.Y == koordinat.Y).FirstOrDefault();
+            kare = kareler.Where(k => k.Koordinat.X == koordinat.X -2 && k.Koordinat.Y == koordinat.Y - 1).FirstOrDefault();
             KareyiEkle(_kareler, kare);
 
-            kare = kareler.Where(k => k.Koordinat.X == koordinat.X + 1 && k.Koordinat.Y == koordinat.Y - 1).FirstOrDefault();
+            kare = kareler.Where(k => k.Koordinat.X == koordinat.X - 2 && k.Koordinat.Y == koordinat.Y + 1).FirstOrDefault();
             KareyiEkle(_kareler, kare);
 
-            kare = kareler.Where(k => k.Koordinat.X == koordinat.X && k.Koordinat.Y == koordinat.Y - 1).FirstOrDefault();
+            kare = kareler.Where(k => k.Koordinat.X == koordinat.X + 2 && k.Koordinat.Y == koordinat.Y - 1).FirstOrDefault();
             KareyiEkle(_kareler, kare);
 
-            kare = kareler.Where(k => k.Koordinat.X == koordinat.X - 1 && k.Koordinat.Y == koordinat.Y - 1).FirstOrDefault();
+            kare = kareler.Where(k => k.Koordinat.X == koordinat.X + 1 && k.Koordinat.Y == koordinat.Y - 2).FirstOrDefault();
             KareyiEkle(_kareler, kare);
 
-            kare = kareler.Where(k => k.Koordinat.X == koordinat.X - 1 && k.Koordinat.Y == koordinat.Y).FirstOrDefault();
+            kare = kareler.Where(k => k.Koordinat.X == koordinat.X + 1 && k.Koordinat.Y == koordinat.Y + 2).FirstOrDefault();
             KareyiEkle(_kareler, kare);
 
-            kare = kareler.Where(k => k.Koordinat.X == koordinat.X - 1 && k.Koordinat.Y == koordinat.Y + 1).FirstOrDefault();
+            kare = kareler.Where(k => k.Koordinat.X == koordinat.X + 2 && k.Koordinat.Y == koordinat.Y + 1).FirstOrDefault();
             KareyiEkle(_kareler, kare);
 
-            kare = kareler.Where(k => k.Koordinat.X == koordinat.X && k.Koordinat.Y == koordinat.Y + 1).FirstOrDefault();
+            kare = kareler.Where(k => k.Koordinat.X == koordinat.X - 1 && k.Koordinat.Y == koordinat.Y - 2).FirstOrDefault();
             KareyiEkle(_kareler, kare);
 
             return _kareler;
         }
 
+
         public static void Yerlestir(List<Kare> kareler)
         {
             foreach (Kare kare in kareler)
             {
-                if ((kare.Koordinat.X == 4 && kare.Koordinat.Y == 1))
+                if ((kare.Koordinat.X == 2 && kare.Koordinat.Y == 1) || (kare.Koordinat.X == 7 && kare.Koordinat.Y == 1))
                 {
-                    kare.Tas = new Sah{ Renk = Renk.Beyaz, Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZSAH}" };
-                    kare.Button.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.BEYAZSAH}");
+                    kare.Tas = new At { Renk = Renk.Beyaz, Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZAT}" };
+                    kare.Button.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.BEYAZAT}");
                     kare.Durum = KareDurum.Dolu;
                 }
 
-                if((kare.Koordinat.X == 4 && kare.Koordinat.Y == 8))
+                if ((kare.Koordinat.X == 2 && kare.Koordinat.Y == 8) || (kare.Koordinat.X == 7 && kare.Koordinat.Y == 8))
                 {
-                    kare.Tas = new Sah { Renk = Renk.Siyah, Resim = $"{Environment.CurrentDirectory}{TasResimleri.SIYAHSAH}" };
-                    kare.Button.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.SIYAHSAH}");
+                    kare.Tas = new At { Renk = Renk.Siyah, Resim = $"{Environment.CurrentDirectory}{TasResimleri.SİYAHAT}" };
+                    kare.Button.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.SİYAHAT}");
                     kare.Durum = KareDurum.Dolu;
                 }
             }
