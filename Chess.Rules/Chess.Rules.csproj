@@ -53,6 +53,7 @@
     <Compile Include="Taslar\At.cs" />
     <Compile Include="Taslar\Fil.cs" />
     <Compile Include="Taslar\Kale.cs" />
+    <Compile Include="Taslar\Piyon.cs" />
     <Compile Include="Taslar\Sah.cs" />
     <Compile Include="Taslar\Vezir.cs" />
   </ItemGroup>

@@ -36,6 +36,7 @@ namespace Desktop.UI
             Vezir.Yerlestir(this.Kareler);
             Sah.Yerlestir(this.Kareler);
             At.Yerlestir(this.Kareler);
+            Piyon.Yerlestir(this.Kareler);
         }
 
         private void TahtayıYarat()

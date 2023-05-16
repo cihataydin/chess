@@ -18,5 +18,7 @@ namespace Chess.Rules.Sabitler
         public const string SIYAHSAH = @"\..\..\Resimler\siyahsah.png";
         public const string BEYAZAT = @"\..\..\Resimler\beyazat.png";
         public const string SİYAHAT = @"\..\..\Resimler\siyahat.png";
+        public const string BEYAZPIYON = @"\..\..\Resimler\beyazpiyon.png";
+        public const string SIYAHPIYON = @"\..\..\Resimler\siyahpiyon.png";
     }
 }

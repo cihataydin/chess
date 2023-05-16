@@ -56,7 +56,6 @@ namespace Chess.Rules.Taslar
                 {
                     break;
                 }
-
             }
 
             for (int i = koordinat.Y - 1, j = koordinat.X - 1; 0 < i && i < 9 && j > 0 && j < 9; i--, j--)
@@ -76,8 +75,6 @@ namespace Chess.Rules.Taslar
                 {
                     break;
                 }
-
-
             }
 
             for (int i = koordinat.Y + 1, j = koordinat.X - 1; 0 < i && i < 9 && j > 0 && j < 9; i++, j--)
@@ -116,7 +113,6 @@ namespace Chess.Rules.Taslar
                 {
                     break;
                 }
-
             }
             for (int i = koordinat.Y + 1; i < 9; i++)
             {
