@@ -48,13 +48,11 @@ namespace Chess.Rules.Taslar
                
 
               Kare  kare = kareler.Where(k => k.Koordinat.X == koordinat.X + 1 && k.Koordinat.Y == koordinat.Y + 1).FirstOrDefault();
-                if (kare?.Durum == KareDurum.Dolu && kare?.Tas.Renk != this.Renk)
-                    _kareler.Add(kare);
+                CarprazKareEkle(_kareler, kare);
 
                 kare = kareler.Where(k => k.Koordinat.X == koordinat.X - 1 && k.Koordinat.Y == koordinat.Y + 1).FirstOrDefault();
                 // TODO: Alttaki iki satır ÇaprazKareEkle metoduna taşınacak ve o metot çağrılacak kareyi ekle metodyu gibi
-                if (kare?.Durum == KareDurum.Dolu && kare?.Tas.Renk != this.Renk)
-                    _kareler.Add(kare);
+                CarprazKareEkle(_kareler, kare);
 
                  kare = kareler.Where(k => k.Koordinat.X == koordinat.X && k.Koordinat.Y == koordinat.Y + 1).FirstOrDefault();
                 KareyiEkle(_kareler, kare); 
@@ -119,6 +117,12 @@ namespace Chess.Rules.Taslar
             {
                 kareler.Add(kare);
             }
+        }
+
+        private void CarprazKareEkle(List<Kare> kareler,Kare kare)
+        {
+            if (kare?.Durum == KareDurum.Dolu && kare?.Tas.Renk != this.Renk)
+                kareler.Add(kare);
         }
     }
 }
