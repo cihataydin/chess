@@ -45,38 +45,36 @@ namespace Chess.Rules.Taslar
 
             if (this.Renk == Renk.Beyaz)
             {
-               
 
-              Kare  kare = kareler.Where(k => k.Koordinat.X == koordinat.X + 1 && k.Koordinat.Y == koordinat.Y + 1).FirstOrDefault();
+
+                Kare kare = kareler.Where(k => k.Koordinat.X == koordinat.X + 1 && k.Koordinat.Y == koordinat.Y + 1).FirstOrDefault();
                 CarprazKareEkle(_kareler, kare);
 
                 kare = kareler.Where(k => k.Koordinat.X == koordinat.X - 1 && k.Koordinat.Y == koordinat.Y + 1).FirstOrDefault();
                 // TODO: Alttaki iki satır ÇaprazKareEkle metoduna taşınacak ve o metot çağrılacak kareyi ekle metodyu gibi
                 CarprazKareEkle(_kareler, kare);
 
-                 kare = kareler.Where(k => k.Koordinat.X == koordinat.X && k.Koordinat.Y == koordinat.Y + 1).FirstOrDefault();
-                KareyiEkle(_kareler, kare); 
+                kare = kareler.Where(k => k.Koordinat.X == koordinat.X && k.Koordinat.Y == koordinat.Y + 1).FirstOrDefault();
+                KareyiEkle(_kareler, kare);
 
                 if (!Oynadı && kare.Durum == KareDurum.Bos)
                 {
-                   kare = kareler.Where(k => k.Koordinat.X == koordinat.X && k.Koordinat.Y == koordinat.Y + 2).FirstOrDefault();
-                   KareyiEkle(_kareler, kare);
+                    kare = kareler.Where(k => k.Koordinat.X == koordinat.X && k.Koordinat.Y == koordinat.Y + 2).FirstOrDefault();
+                    KareyiEkle(_kareler, kare);
                 }
 
             }
             else if (this.Renk == Renk.Siyah)
             {
-               
 
-              Kare kare = kareler.Where(k => k.Koordinat.X == koordinat.X + 1 && k.Koordinat.Y == koordinat.Y - 1).FirstOrDefault();
-                if (kare?.Durum == KareDurum.Dolu && kare?.Tas.Renk != this.Renk)
-                    _kareler.Add(kare);
+
+                Kare kare = kareler.Where(k => k.Koordinat.X == koordinat.X + 1 && k.Koordinat.Y == koordinat.Y - 1).FirstOrDefault();
+                CarprazKareEkle(_kareler, kare);
 
                 kare = kareler.Where(k => k.Koordinat.X == koordinat.X - 1 && k.Koordinat.Y == koordinat.Y - 1).FirstOrDefault();
-                if (kare?.Durum == KareDurum.Dolu && kare?.Tas.Renk != this.Renk)
-                    _kareler.Add(kare);
+                CarprazKareEkle(_kareler, kare);
 
-                 kare = kareler.Where(k => k.Koordinat.X == koordinat.X && k.Koordinat.Y == koordinat.Y - 1).FirstOrDefault();
+                kare = kareler.Where(k => k.Koordinat.X == koordinat.X && k.Koordinat.Y == koordinat.Y - 1).FirstOrDefault();
                 KareyiEkle(_kareler, kare);
 
                 if (!Oynadı && kare.Durum == KareDurum.Bos)
@@ -85,7 +83,7 @@ namespace Chess.Rules.Taslar
                     KareyiEkle(_kareler, kare);
                 }
             }
-          
+
             return _kareler;
         }
 
@@ -119,7 +117,7 @@ namespace Chess.Rules.Taslar
             }
         }
 
-        private void CarprazKareEkle(List<Kare> kareler,Kare kare)
+        private void CarprazKareEkle(List<Kare> kareler, Kare kare)
         {
             if (kare?.Durum == KareDurum.Dolu && kare?.Tas.Renk != this.Renk)
                 kareler.Add(kare);

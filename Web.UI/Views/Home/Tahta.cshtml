@@ -1,0 +1,56 @@
+﻿@using Chess.Rules
+@using Chess.Rules.Sabitler;
+@{
+    ViewBag.Title = "StrancTahtası";
+}
+
+@{
+
+    int x = 0;
+    int y = 0;
+    string pixel = "{0}px";
+
+    for (int i = 1; i < 9; i++)
+    {
+        Kare kare = new Kare();
+        <div class="container">
+        @for (int j = 1; j < 9; j++)
+        {
+            if (j % 2 == 0)
+            {
+                if (i % 2 == 0)
+                {
+                    <input type="button" name="" value="" style="background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" />
+                    kare.Renk = Renk.Beyaz;
+
+                }
+                else
+                {
+                    <input type="button" name="" value="" style="background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" />
+                    kare.Renk = Renk.Siyah;
+
+                }
+            }
+            else
+            {
+                if (i % 2 == 0)
+                {
+                    <input type="button" name="" value="" style="background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" />
+                    kare.Renk = Renk.Siyah;
+                }
+                else
+                {
+                    <input type="button" name="" value="" style="background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" />
+                    kare.Renk = Renk.Beyaz;
+                }
+            }
+
+            x += 100;
+        }
+        </div>
+        y += 100;
+        x = 0;
+    }
+}
+
+
