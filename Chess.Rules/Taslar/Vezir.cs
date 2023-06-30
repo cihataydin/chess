@@ -8,33 +8,8 @@ using System.Threading.Tasks;
 
 namespace Chess.Rules.Taslar
 {
-    public class Vezir:ITas
+    public class Vezir: Tas, ITas
     {
-        public Renk Renk { get; set; } 
-        public string Resim { get; set; }
-      
-        public bool HareketEt(Kare baslangıcKare, Kare hedefKare, List<Kare> kareler)
-        {
-            List<Kare> uygunKareler = UygunKareleriHesapla(baslangıcKare.Koordinat, kareler);
-
-            bool hareketEdilebilir = uygunKareler.Contains(hedefKare);
-
-            if (hareketEdilebilir)
-            {
-                ITas tas = baslangıcKare.Tas;
-
-                baslangıcKare.Tas = null;
-                baslangıcKare.Durum = KareDurum.Bos;
-                baslangıcKare.Image = null;
-
-                hedefKare.Tas = tas;
-                hedefKare.Durum = KareDurum.Dolu;
-                hedefKare.Image = Image.FromFile(Resim);
-            }
-
-            return hareketEdilebilir;
-        }
-
         public List<Kare> UygunKareleriHesapla(Koordinat koordinat, List<Kare> kareler)
         {
             List<Kare> koordinatlar = new List<Kare>();
@@ -201,14 +176,14 @@ namespace Chess.Rules.Taslar
                 if ((kare.Koordinat.X == 5 && kare.Koordinat.Y == 1))
                 {
                     kare.Tas = new Vezir { Renk = Renk.Beyaz, Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZVEZIR}" };
-                    kare.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.BEYAZVEZIR}");
+                    kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZVEZIR}";
                     kare.Durum = KareDurum.Dolu;
                 }
 
                 if ((kare.Koordinat.X == 5 && kare.Koordinat.Y == 8))
                 {
                     kare.Tas = new Vezir { Renk = Renk.Siyah, Resim = $"{Environment.CurrentDirectory}{TasResimleri.SIYAHVEZIR}" };
-                    kare.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.SIYAHVEZIR}");
+                    kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.SIYAHVEZIR}";
                     kare.Durum = KareDurum.Dolu;
                 }
             }

@@ -46,7 +46,7 @@ namespace Desktop.UI
                 {
                     Button button = Butonlar.Where(b => b.AccessibleName == kare.Koordinat.X.ToString() + kare.Koordinat.Y.ToString()).FirstOrDefault();
                     if (button != null)
-                        button.Image = kare.Image;
+                        button.Image = Image.FromFile(kare.Resim);
                 }
             }
         }
@@ -138,10 +138,10 @@ namespace Desktop.UI
                         Kare oncekiKare = Kareler.Where(kare => kare.Koordinat.X.ToString() + kare.Koordinat.Y.ToString() == oncekiButon.AccessibleName).FirstOrDefault();
                         Kare hedefKare = Kareler.Where(kare => kare.Koordinat.X.ToString() + kare.Koordinat.Y.ToString() == button.AccessibleName).FirstOrDefault();
 
-                        oncekiKare.Tas.HareketEt(oncekiKare, hedefKare, this.Kareler);
+                        oncekiKare.Tas.HareketEt(oncekiKare, hedefKare, this.Kareler, oncekiKare.Tas.UygunKareleriHesapla);
 
-                        oncekiButon.Image = oncekiKare.Image;
-                        button.Image = hedefKare.Image;
+                        oncekiButon.Image = oncekiKare.Resim is null ? null : Image.FromFile(oncekiKare.Resim);
+                        button.Image = hedefKare.Resim is null ? null : Image.FromFile(hedefKare.Resim);
 
                         break;
                     }

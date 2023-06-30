@@ -11,7 +11,7 @@ namespace Chess.Rules
     {
         string Resim { get; set; }
         Renk Renk { get; set; }
-        bool HareketEt(Kare baslangıcKare, Kare hedefKare, List<Kare> kareler);
+        bool HareketEt(Kare baslangıcKare, Kare hedefKare, List<Kare> kareler, Func<Koordinat, List<Kare>, List<Kare>> fonksiyon);
         List<Kare> UygunKareleriHesapla(Koordinat koordinat, List<Kare> kareler);
     }
 }

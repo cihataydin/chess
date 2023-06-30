@@ -19,6 +19,6 @@ namespace Chess.Rules
         public KareDurum Durum { get; set; }
         public Renk Renk { get; set; }
         public Koordinat Koordinat { get; set; }
-        public Image Image { get; set; }
+        public string Resim { get; set; }
     }
 }

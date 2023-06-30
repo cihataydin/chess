@@ -8,33 +8,8 @@ using System.Threading.Tasks;
 
 namespace Chess.Rules.Taslar
 {
-    public class At : ITas
+    public class At : Tas, ITas
     {
-        public Renk Renk { get; set; }
-        public string Resim { get; set; }
-
-        public bool HareketEt(Kare baslangıcKare, Kare hedefKare, List<Kare> kareler)
-        {
-            List<Kare> uygunKareler = UygunKareleriHesapla(baslangıcKare.Koordinat, kareler);
-
-            bool hareketEdilebilir = uygunKareler.Contains(hedefKare);
-
-            if (hareketEdilebilir)
-            {
-                ITas tas = baslangıcKare.Tas;
-
-                baslangıcKare.Tas = null;
-                baslangıcKare.Durum = KareDurum.Bos;
-                baslangıcKare.Image = null;
-
-                hedefKare.Tas = tas;
-                hedefKare.Durum = KareDurum.Dolu;
-                hedefKare.Image = Image.FromFile(Resim);
-            }
-
-            return hareketEdilebilir;
-        }
-
         public List<Kare> UygunKareleriHesapla(Koordinat koordinat, List<Kare> kareler)
         {
             List<Kare> _kareler = new List<Kare>();
@@ -66,7 +41,6 @@ namespace Chess.Rules.Taslar
             return _kareler;
         }
 
-
         public static void Yerlestir(List<Kare> kareler)
         {
             foreach (Kare kare in kareler)
@@ -74,14 +48,14 @@ namespace Chess.Rules.Taslar
                 if ((kare.Koordinat.X == 2 && kare.Koordinat.Y == 1) || (kare.Koordinat.X == 7 && kare.Koordinat.Y == 1))
                 {
                     kare.Tas = new At { Renk = Renk.Beyaz, Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZAT}" };
-                    kare.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.BEYAZAT}");
+                    kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZAT}";
                     kare.Durum = KareDurum.Dolu;
                 }
 
                 if ((kare.Koordinat.X == 2 && kare.Koordinat.Y == 8) || (kare.Koordinat.X == 7 && kare.Koordinat.Y == 8))
                 {
                     kare.Tas = new At { Renk = Renk.Siyah, Resim = $"{Environment.CurrentDirectory}{TasResimleri.SİYAHAT}" };
-                    kare.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.SİYAHAT}");
+                    kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.SİYAHAT}";
                     kare.Durum = KareDurum.Dolu;
                 }
             }
