@@ -1,11 +1,14 @@
 ﻿@using Chess.Rules
 @using Chess.Rules.Sabitler;
+@using Chess.Rules.Taslar;
+@model List<Kare>;
 @{
     ViewBag.Title = "StrancTahtası";
 }
 
 @{
 
+  
     int x = 0;
     int y = 0;
     string pixel = "{0}px";
@@ -20,7 +23,7 @@
             {
                 if (i % 2 == 0)
                 {
-                    <input type="button" name="" value="" style="background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" />
+                        <button type="submit" name="" value="" style="background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)"><img src="~/css/" height="35" /></button>
                     kare.Renk = Renk.Beyaz;
 
                 }

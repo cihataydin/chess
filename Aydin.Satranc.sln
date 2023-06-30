@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desktop.UI", "Desktop.UI\De
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Rules", "Chess.Rules\Chess.Rules.csproj", "{91421EB3-C61C-4D97-8EF3-23C452A31B84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.UI", "Web.UI\Web.UI.csproj", "{A95D2167-8F02-46FF-96CA-2CFD0551F0B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.UI", "Web.UI\Web.UI.csproj", "{7CEA3755-007B-49B7-8731-52D704F4C2C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{91421EB3-C61C-4D97-8EF3-23C452A31B84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91421EB3-C61C-4D97-8EF3-23C452A31B84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91421EB3-C61C-4D97-8EF3-23C452A31B84}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A95D2167-8F02-46FF-96CA-2CFD0551F0B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A95D2167-8F02-46FF-96CA-2CFD0551F0B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A95D2167-8F02-46FF-96CA-2CFD0551F0B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A95D2167-8F02-46FF-96CA-2CFD0551F0B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CEA3755-007B-49B7-8731-52D704F4C2C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CEA3755-007B-49B7-8731-52D704F4C2C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CEA3755-007B-49B7-8731-52D704F4C2C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CEA3755-007B-49B7-8731-52D704F4C2C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
