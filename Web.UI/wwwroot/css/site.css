@@ -39,7 +39,7 @@ textarea {
     position: relative;
 }
 
-input, button {
+input, button, img {
     height: 100px;
     width: 100px;
 }

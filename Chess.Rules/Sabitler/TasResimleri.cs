@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Chess.Rules.Sabitler
 {
+    // TODO: Resimler Desktop.UI'ın içinde olmamalı. Chess.Rules içinde olmalı.
     public class TasResimleri
     {
+        // TODO: Kelimeler alt tre ile ayrılmalı ve hepsi büyük harf olmalı. Ayrıca ingilizcede büyük İ yoktur.
+
         public const string BEYAZ_KALE = @"\..\..\Resimler\beyazkale.png";
         public const string SIYAH_KALE = @"\..\..\Resimler\siyahkale.png";
         public const string BEYAZ_FIL = @"\..\..\Resimler\beyazfil.png";
