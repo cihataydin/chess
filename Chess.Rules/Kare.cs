@@ -1,10 +1,10 @@
 ﻿using Chess.Rules.Sabitler;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Chess.Rules
 {
@@ -19,6 +19,6 @@ namespace Chess.Rules
         public KareDurum Durum { get; set; }
         public Renk Renk { get; set; }
         public Koordinat Koordinat { get; set; }
-        public Button Button { get; set; }
+        public Image Image { get; set; }
     }
 }

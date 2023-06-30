@@ -25,11 +25,11 @@ namespace Chess.Rules.Taslar
 
                 baslangıcKare.Tas = null;
                 baslangıcKare.Durum = KareDurum.Bos;
-                baslangıcKare.Button.Image = null;
+                baslangıcKare.Image = null;
 
                 hedefKare.Tas = tas;
                 hedefKare.Durum = KareDurum.Dolu;
-                hedefKare.Button.Image = Image.FromFile(Resim);
+                hedefKare.Image = Image.FromFile(Resim);
             }
 
             return hareketEdilebilir;
@@ -73,14 +73,14 @@ namespace Chess.Rules.Taslar
                 if ((kare.Koordinat.X == 4 && kare.Koordinat.Y == 1))
                 {
                     kare.Tas = new Sah{ Renk = Renk.Beyaz, Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZSAH}" };
-                    kare.Button.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.BEYAZSAH}");
+                    kare.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.BEYAZSAH}");
                     kare.Durum = KareDurum.Dolu;
                 }
 
                 if((kare.Koordinat.X == 4 && kare.Koordinat.Y == 8))
                 {
                     kare.Tas = new Sah { Renk = Renk.Siyah, Resim = $"{Environment.CurrentDirectory}{TasResimleri.SIYAHSAH}" };
-                    kare.Button.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.SIYAHSAH}");
+                    kare.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.SIYAHSAH}");
                     kare.Durum = KareDurum.Dolu;
                 }
             }

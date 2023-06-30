@@ -25,11 +25,11 @@ namespace Chess.Rules.Taslar
 
                 baslangıcKare.Tas = null;
                 baslangıcKare.Durum = KareDurum.Bos;
-                baslangıcKare.Button.Image = null;
+                baslangıcKare.Image = null;
 
                 hedefKare.Tas = tas;
                 hedefKare.Durum = KareDurum.Dolu;
-                hedefKare.Button.Image = Image.FromFile(Resim);
+                hedefKare.Image = Image.FromFile(Resim);
             }
 
             return hareketEdilebilir;
@@ -74,14 +74,14 @@ namespace Chess.Rules.Taslar
                 if ((kare.Koordinat.X == 2 && kare.Koordinat.Y == 1) || (kare.Koordinat.X == 7 && kare.Koordinat.Y == 1))
                 {
                     kare.Tas = new At { Renk = Renk.Beyaz, Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZAT}" };
-                    kare.Button.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.BEYAZAT}");
+                    kare.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.BEYAZAT}");
                     kare.Durum = KareDurum.Dolu;
                 }
 
                 if ((kare.Koordinat.X == 2 && kare.Koordinat.Y == 8) || (kare.Koordinat.X == 7 && kare.Koordinat.Y == 8))
                 {
                     kare.Tas = new At { Renk = Renk.Siyah, Resim = $"{Environment.CurrentDirectory}{TasResimleri.SİYAHAT}" };
-                    kare.Button.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.SİYAHAT}");
+                    kare.Image = Image.FromFile($"{Environment.CurrentDirectory}{TasResimleri.SİYAHAT}");
                     kare.Durum = KareDurum.Dolu;
                 }
             }
