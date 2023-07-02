@@ -5,16 +5,17 @@
 
 
 
-function onClick(x, y) {
+function onClick(x, y, karedolumu) {
     $.ajax({
         async: false,
         url: '/Home/OnClick',
-        data: {  X: x, Y:y },
+        data: { X: x, Y: y, KareDolumu: karedolumu },
         method: "POST",
         //contentType: "application/json;charset=utf-8",
         success: function (d) {
             $('body').html(d)
-        }, error: function () {
+        }, error: function (e) {
+            console.error(e);
             alert("hata olustu");
         }, complete: function () {
         }

@@ -15,7 +15,7 @@ namespace Desktop.UI
 {
     public partial class Tahta : Form
     {
-        public string ButtonAccessibleName { get; set; }
+        public string OncekiButtonAccessibleName { get; set; }
 
         public int Sayac { get; set; }
 
@@ -116,13 +116,13 @@ namespace Desktop.UI
 
         }
 
-        private void TasıHareketEttir(object sender, EventArgs e, Button button)
+        private void TasıHareketEttir(object sender, EventArgs e, Button tıklananButton)
         {
             if (Sayac == 0)
             {
-                this.ButtonAccessibleName = button.AccessibleName;
+                this.OncekiButtonAccessibleName = tıklananButton.AccessibleName;
 
-                if (button.Image != null)
+                if (tıklananButton.Image != null)
                 {
                     Sayac++;
                 }
@@ -133,15 +133,15 @@ namespace Desktop.UI
                 {
                     Button oncekiButon = (Button)control;
 
-                    if (oncekiButon.AccessibleName == ButtonAccessibleName && oncekiButon.Image != null && button.AccessibleName != oncekiButon.AccessibleName)
+                    if (oncekiButon.AccessibleName == OncekiButtonAccessibleName && oncekiButon.Image != null && tıklananButton.AccessibleName != oncekiButon.AccessibleName)
                     {
                         Kare oncekiKare = Kareler.Where(kare => kare.Koordinat.X.ToString() + kare.Koordinat.Y.ToString() == oncekiButon.AccessibleName).FirstOrDefault();
-                        Kare hedefKare = Kareler.Where(kare => kare.Koordinat.X.ToString() + kare.Koordinat.Y.ToString() == button.AccessibleName).FirstOrDefault();
+                        Kare hedefKare = Kareler.Where(kare => kare.Koordinat.X.ToString() + kare.Koordinat.Y.ToString() == tıklananButton.AccessibleName).FirstOrDefault();
 
                         oncekiKare.Tas.HareketEt(oncekiKare, hedefKare, this.Kareler, oncekiKare.Tas.UygunKareleriHesapla);
 
                         oncekiButon.Image = oncekiKare.Resim is null ? null : Image.FromFile(oncekiKare.Resim);
-                        button.Image = hedefKare.Resim is null ? null : Image.FromFile(hedefKare.Resim);
+                        tıklananButton.Image = hedefKare.Resim is null ? null : Image.FromFile(hedefKare.Resim);
 
                         break;
                     }
