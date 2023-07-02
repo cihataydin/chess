@@ -2,3 +2,22 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+
+
+function onClick(x, y) {
+    $.ajax({
+        async: false,
+        url: '/Home/OnClick',
+        data: {  X: x, Y:y },
+        method: "POST",
+        //contentType: "application/json;charset=utf-8",
+        success: function (d) {
+            $('body').html(d)
+        }, error: function () {
+            alert("hata olustu");
+        }, complete: function () {
+        }
+    });
+}
+

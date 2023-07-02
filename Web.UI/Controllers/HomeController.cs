@@ -5,47 +5,85 @@ using System.Diagnostics;
 using Chess.Rules.Sabitler;
 using System.Security.Cryptography.X509Certificates;
 using System.Drawing;
-
+using Web.UI.Models;
 
 namespace Web.UI.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
         public List<Kare> Kareler { get; set; }
         public HomeController()
         {
             Kareler = new List<Kare>();
-            TaslarıYarat();
+            KareleriYarat();
+            TaslarıYerlestir();
         }
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
-
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
 
         public IActionResult Tahta()
         {    
             return View(Kareler);
         }
-       
-        public  void  TaslarıYarat()
+
+        [HttpPost]
+        public IActionResult OnClick(OnClickModel onClickModel)
         {
-            Kale.Yerlestir(this.Kareler);
-            At.Yerlestir(this.Kareler);
-            Fil.Yerlestir(this.Kareler);
-            Piyon.Yerlestir(this.Kareler);
-            Sah.Yerlestir(this.Kareler);
-            Vezir.Yerlestir(this.Kareler);
+            return RedirectToAction("Tahta");
+        }
+
+        private void TaslarıYerlestir()
+        {
+            Kale.Yerlestir(this.Kareler, true);
+            At.Yerlestir(this.Kareler, true);
+            Fil.Yerlestir(this.Kareler, true);
+            Piyon.Yerlestir(this.Kareler, true);
+            Sah.Yerlestir(this.Kareler, true);
+            Vezir.Yerlestir(this.Kareler, true);
+        }
+
+        private void KareleriYarat()
+        {
+            int x = 0;
+            int y = 0;
+            for (int i = 1; i < 9; i++)
+            {
+                for (int j = 1; j < 9; j++)
+                {             
+                    Kare kare = new Kare();               
+                    kare.Koordinat.X = i;
+                    kare.Koordinat.Y = j;
+                    // TODO:click olayı eklenmeli.
+
+                    if (j % 2 == 0)
+                    {
+                        if (i % 2 == 0)
+                        {                           
+                            kare.Renk = Renk.Beyaz;
+                        }
+                        else
+                        {                    
+                            kare.Renk = Renk.Siyah;
+                        }
+                    }
+                    else
+                    {
+                        if (i % 2 == 0)
+                        {                        
+                            kare.Renk = Renk.Siyah;
+                        }
+                        else
+                        {                         
+                            kare.Renk = Renk.Beyaz;
+                        }
+                    }
+
+                    kare.Durum = KareDurum.Bos;
+                    Kareler.Add(kare);
+                 
+                    y += 100;
+                }
+                x += 100;
+                y = 0;
+            }
         }
     }
-
-
-
 }

@@ -11,17 +11,30 @@ namespace Chess.Rules.Sabitler
     {
         // TODO: Kelimeler alt tre ile ayrılmalı ve hepsi büyük harf olmalı. Ayrıca ingilizcede büyük İ yoktur.
 
-        public const string BEYAZ_KALE = @"\..\..\Resimler\beyazkale.png";
-        public const string SIYAH_KALE = @"\..\..\Resimler\siyahkale.png";
-        public const string BEYAZ_FIL = @"\..\..\Resimler\beyazfil.png";
-        public const string SIYAH_FIL = @"\..\..\Resimler\siyahfil.png";
-        public const string BEYAZVEZIR = @"\..\..\Resimler\beyazvezir.png";
-        public const string SIYAHVEZIR = @"\..\..\Resimler\siyahvezir.png";
-        public const string BEYAZSAH = @"\..\..\Resimler\beyazsah.png";
-        public const string SIYAHSAH = @"\..\..\Resimler\siyahsah.png";
-        public const string BEYAZAT = @"\..\..\Resimler\beyazat.png";
-        public const string SİYAHAT = @"\..\..\Resimler\siyahat.png";
-        public const string BEYAZPIYON = @"\..\..\Resimler\beyazpiyon.png";
-        public const string SIYAHPIYON = @"\..\..\Resimler\siyahpiyon.png";
+        public const string DESKTOP_BEYAZ_KALE = @"\..\..\Resimler\beyazkale.png";
+        public const string DESKTOP_SIYAH_KALE = @"\..\..\Resimler\siyahkale.png";
+        public const string DESKTOP_BEYAZ_FIL = @"\..\..\Resimler\beyazfil.png";
+        public const string DESKTOP_SIYAH_FIL = @"\..\..\Resimler\siyahfil.png";
+        public const string DESKTOP_BEYAZ_VEZIR = @"\..\..\Resimler\beyazvezir.png";
+        public const string DESKTOP_SIYAH_VEZIR = @"\..\..\Resimler\siyahvezir.png";
+        public const string DESKTOP_BEYAZ_SAH = @"\..\..\Resimler\beyazsah.png";
+        public const string DESKTOP_SIYAH_SAH = @"\..\..\Resimler\siyahsah.png";
+        public const string DESKTOP_BEYAZ_AT = @"\..\..\Resimler\beyazat.png";
+        public const string DESKTOP_SIYAH_AT = @"\..\..\Resimler\siyahat.png";
+        public const string DESKTOP_BEYAZ_PIYON = @"\..\..\Resimler\beyazpiyon.png";
+        public const string DESKTOP_SIYAH_PIYON = @"\..\..\Resimler\siyahpiyon.png";
+
+        public const string WEB_BEYAZ_KALE = @"/Resimler/beyazkale.png";
+        public const string WEB_SIYAH_KALE = @"/Resimler/siyahkale.png";
+        public const string WEB_BEYAZ_FIL = @"/Resimler/beyazfil.png";
+        public const string WEB_SIYAH_FIL = @"/Resimler/siyahfil.png";
+        public const string WEB_BEYAZ_VEZIR = @"/Resimler/beyazvezir.png";
+        public const string WEB_SIYAH_VEZIR = @"/Resimler/siyahvezir.png";
+        public const string WEB_BEYAZ_SAH = @"/Resimler/beyazsah.png";
+        public const string WEB_SIYAH_SAH = @"/Resimler/siyahsah.png";
+        public const string WEB_BEYAZ_AT = @"/Resimler/beyazat.png";
+        public const string WEB_SIYAH_AT = @"/Resimler/siyahat.png";
+        public const string WEB_BEYAZ_PIYON = @"/Resimler/beyazpiyon.png";
+        public const string WEB_SIYAH_PIYON = @"/Resimler/siyahpiyon.png";
     }
 }

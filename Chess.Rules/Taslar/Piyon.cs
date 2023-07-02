@@ -57,21 +57,39 @@ namespace Chess.Rules.Taslar
         }
 
 
-        public static void Yerlestir(List<Kare> kareler)
+        public static void Yerlestir(List<Kare> kareler, bool webmi = false)
         {
             foreach (Kare kare in kareler)
             {
                 if (kare.Koordinat.Y == 2)
                 {
-                    kare.Tas = new Piyon { Renk = Renk.Beyaz, Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZPIYON}" };
-                    kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZPIYON}";
+                    if (webmi)
+                    {
+                        kare.Tas = new Piyon { Renk = Renk.Beyaz, Resim = $"{TasResimleri.WEB_BEYAZ_PIYON}" };
+                        kare.Resim = $"{TasResimleri.WEB_BEYAZ_PIYON}";
+                    }
+                    else
+                    {
+                        kare.Tas = new Piyon { Renk = Renk.Beyaz, Resim = $"{Environment.CurrentDirectory}{TasResimleri.DESKTOP_BEYAZ_PIYON}" };
+                        kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.DESKTOP_BEYAZ_PIYON}";
+                    }
+                   
                     kare.Durum = KareDurum.Dolu;
                 }
 
                 if (kare.Koordinat.Y == 7)
                 {
-                    kare.Tas = new Piyon { Renk = Renk.Siyah, Resim = $"{Environment.CurrentDirectory}{TasResimleri.SIYAHPIYON}" };
-                    kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.SIYAHPIYON}";
+                    if (webmi)
+                    {
+                        kare.Tas = new Piyon { Renk = Renk.Siyah, Resim = $"{TasResimleri.WEB_SIYAH_PIYON}" };
+                        kare.Resim = $"{TasResimleri.WEB_SIYAH_PIYON}";
+                    }
+                    else
+                    {
+                        kare.Tas = new Piyon { Renk = Renk.Siyah, Resim = $"{Environment.CurrentDirectory}{TasResimleri.DESKTOP_SIYAH_PIYON}" };
+                        kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.DESKTOP_SIYAH_PIYON}";
+                    }
+                 
                     kare.Durum = KareDurum.Dolu;
 
                 }

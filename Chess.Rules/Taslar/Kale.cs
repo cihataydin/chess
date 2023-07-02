@@ -94,21 +94,39 @@ namespace Chess.Rules.Taslar
             return koordinatlar; 
         }
 
-        public static void Yerlestir(List<Kare> kareler)
+        public static void Yerlestir(List<Kare> kareler, bool webmi = false)
         {
             foreach (Kare kare in kareler)
             {
                 if((kare.Koordinat.X == 1 && kare.Koordinat.Y == 1) || (kare.Koordinat.X == 8 && kare.Koordinat.Y == 1))
                 {
-                    kare.Tas = new Kale { Renk = Renk.Beyaz, Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZ_KALE}" };
-                    kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZ_KALE}";
+                    if (webmi)
+                    {
+                        kare.Tas = new Kale { Renk = Renk.Beyaz, Resim = $"{TasResimleri.WEB_BEYAZ_KALE}" };
+                        kare.Resim = $"{TasResimleri.WEB_BEYAZ_KALE}";
+                    }
+                    else
+                    {
+                        kare.Tas = new Kale { Renk = Renk.Beyaz, Resim = $"{Environment.CurrentDirectory}{TasResimleri.DESKTOP_BEYAZ_KALE}" };
+                        kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.DESKTOP_BEYAZ_KALE}";
+                    }
+                   
                     kare.Durum = KareDurum.Dolu;
                 }
 
                 if ((kare.Koordinat.X == 1 && kare.Koordinat.Y == 8) || (kare.Koordinat.X == 8 && kare.Koordinat.Y == 8))
                 {
-                    kare.Tas = new Kale { Renk = Renk.Siyah, Resim = $"{Environment.CurrentDirectory}{TasResimleri.SIYAH_KALE}" };
-                    kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.SIYAH_KALE}";
+                    if (webmi)
+                    {
+                        kare.Tas = new Kale { Renk = Renk.Siyah, Resim = $"{TasResimleri.WEB_SIYAH_KALE}" };
+                        kare.Resim = $"{TasResimleri.WEB_SIYAH_KALE}";
+                    }
+                    else
+                    {
+                        kare.Tas = new Kale { Renk = Renk.Siyah, Resim = $"{Environment.CurrentDirectory}{TasResimleri.DESKTOP_SIYAH_KALE}" };
+                        kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.DESKTOP_SIYAH_KALE}";
+                    }
+                   
                     kare.Durum = KareDurum.Dolu;
                 }
             }

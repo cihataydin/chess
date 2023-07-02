@@ -6,48 +6,79 @@
     ViewBag.Title = "StrancTahtası";
 }
 
-@{  
+@{
     int x = 0;
     int y = 0;
     string pixel = "{0}px";
 
     for (int i = 1; i < 9; i++)
     {
-        Kare kare = new Kare();
         <div class="container">
-        @for (int j = 1; j < 9; j++)
-        {
-            if (j % 2 == 0)
+            @for (int j = 1; j < 9; j++)
             {
+                var koordinat = $"{i}{j}";
+                Kare kare = Model.Where(k => k.Koordinat.X == j && k.Koordinat.Y == i).FirstOrDefault();
+             
+                if (j % 2 == 0)
+                {
+                    if (i % 2 == 0)
+                    {                   
+                        if(kare.Tas != null)
+                        {
+                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i)" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+
+                        }
+                        else
+                        {
+                            <img alt="" onclick="onClick(@j,@i)" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                        }
+
+                    }
+                    else
+                    {
+                        if (kare.Tas != null)
+                        {
+                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i)" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+
+                        }
+                        else
+                        {
+                            <img alt="" onclick="onClick(@j,@i)" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                        }
+
+                    }
+                }
+                else
+                {
                     if (i % 2 == 0)
                     {
-                        <button type="submit" name="" value="" style="background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)"><img src="~\Resimler\beyazkale.png"></button>
-                    kare.Renk = Renk.Beyaz;
+                        if (kare.Tas != null)
+                        {
+                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i)" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
 
-                }
-                else
-                {
-                    <input type="button" name="" value="" style="background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" />
-                    kare.Renk = Renk.Siyah;
+                        }
+                        else
+                        {
+                            <img alt="" onclick="onClick(@j,@i)" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                        }
+                    }
+                    else
+                    {
+                        if (kare.Tas != null)
+                        {
+                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i)" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
 
+                        }
+                        else
+                        {
+                            <img alt="" onclick="onClick(@j,@i)" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                        }
+
+                    }
                 }
+
+                x += 100;
             }
-            else
-            {
-                if (i % 2 == 0)
-                {
-                    <input type="button" name="" value="" style="background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" />
-                    kare.Renk = Renk.Siyah;
-                }
-                else
-                {
-                    <input type="button" name="" value="" style="background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" />
-                    kare.Renk = Renk.Beyaz;
-                }
-            }
-
-            x += 100;
-        }
         </div>
         y += 100;
         x = 0;

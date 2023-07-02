@@ -41,21 +41,38 @@ namespace Chess.Rules.Taslar
             return _kareler;
         }
 
-        public static void Yerlestir(List<Kare> kareler)
+        public static void Yerlestir(List<Kare> kareler, bool webmi = false)
         {
             foreach (Kare kare in kareler)
             {
                 if ((kare.Koordinat.X == 2 && kare.Koordinat.Y == 1) || (kare.Koordinat.X == 7 && kare.Koordinat.Y == 1))
                 {
-                    kare.Tas = new At { Renk = Renk.Beyaz, Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZAT}" };
-                    kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.BEYAZAT}";
+                    if (webmi)
+                    {
+                        kare.Tas = new At { Renk = Renk.Beyaz, Resim = $"{TasResimleri.WEB_BEYAZ_AT}" };
+                        kare.Resim = $"{TasResimleri.WEB_BEYAZ_AT}";
+                    }
+                    else
+                    {
+                        kare.Tas = new At { Renk = Renk.Beyaz, Resim = $"{Environment.CurrentDirectory}{TasResimleri.DESKTOP_BEYAZ_AT}" };
+                        kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.DESKTOP_BEYAZ_AT}";
+                    }
                     kare.Durum = KareDurum.Dolu;
                 }
 
                 if ((kare.Koordinat.X == 2 && kare.Koordinat.Y == 8) || (kare.Koordinat.X == 7 && kare.Koordinat.Y == 8))
                 {
-                    kare.Tas = new At { Renk = Renk.Siyah, Resim = $"{Environment.CurrentDirectory}{TasResimleri.SİYAHAT}" };
-                    kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.SİYAHAT}";
+                    if (webmi)
+                    {
+                        kare.Tas = new At { Renk = Renk.Siyah, Resim = $"{TasResimleri.WEB_SIYAH_AT}" };
+                        kare.Resim = $"{TasResimleri.WEB_SIYAH_AT}";
+                    }
+                    else
+                    {
+                        kare.Tas = new At { Renk = Renk.Siyah, Resim = $"{Environment.CurrentDirectory}{TasResimleri.DESKTOP_SIYAH_AT}" };
+                        kare.Resim = $"{Environment.CurrentDirectory}{TasResimleri.DESKTOP_SIYAH_AT}";
+                    }
+                    
                     kare.Durum = KareDurum.Dolu;
                 }
             }
