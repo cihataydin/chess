@@ -10,6 +10,10 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Diagnostics.Metrics;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.InteropServices;
+using Web.UI.Services;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Web.UI.Controllers
 {
@@ -18,25 +22,113 @@ namespace Web.UI.Controllers
         public List<Kare> Kareler { get; set; }
         public string OncekiKareKoordinat { get; set; }
         public int? Sayac { get; set; }
-        public HomeController()
+        public string TahtaId { get; set; }
+
+        public TahtaModel TahtaModel { get; set; }
+
+        private readonly TahtaService _tahtaService;
+        public HomeController(TahtaService tahtaService)
         {
             Kareler = new List<Kare>();
             KareleriYarat();
             TaslarıYerlestir();
+
+            _tahtaService = tahtaService;
         }
 
         public IActionResult Tahta()
         {
-            return View(Kareler);
+            TahtaId = HttpContext.Session.GetString("TahtaId");
+
+            if (string.IsNullOrEmpty(TahtaId))
+            {
+                TahtaId = Guid.NewGuid().ToString();
+                HttpContext.Session.SetString("TahtaId", TahtaId);
+
+                TahtaModel = new TahtaModel() { Id = TahtaId, Kareler = Kareler };
+            }
+            else
+            {
+                var sonuc = Get(TahtaId).Result.Value;
+
+                if(sonuc is not null)
+                {
+                    // TODO: Interface hatası burada gerçekleşiyor. Deserilize ederken hata alıyor.
+                    TahtaModel = new TahtaModel() { Id = TahtaId, Kareler = JsonConvert.DeserializeObject<List<Kare>>(sonuc.Kareler) };
+                }
+                
+            }
+
+            TahtaModel ??= new TahtaModel() { Id = TahtaId, Kareler = Kareler };
+
+            return View(TahtaModel);
         }
 
         [HttpPost]
-        public IActionResult OnClick(OnClickModel onClickModel)
+        public async Task<IActionResult> OnClick(OnClickModel onClickModel)
         {
-            TasıHareketEttir(onClickModel);
+            await TasıHareketEttir(onClickModel);
 
             return RedirectToAction("Tahta");
         }
+
+        [HttpGet]
+        public async Task<List<Tahta>> Get() =>
+        await _tahtaService.GetAsync();
+
+        [HttpGet]
+        public async Task<ActionResult<Tahta>> Get(string id)
+        {
+            var tahta = await _tahtaService.GetAsync(id);
+
+            if (tahta is null)
+            {
+                return NotFound();
+            }
+
+            return tahta;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Tahta newTahta)
+        {
+            await _tahtaService.CreateAsync(newTahta);
+
+            return CreatedAtAction(nameof(Get), new { id = newTahta.Id }, newTahta);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(string id, Tahta updatedTahta)
+        {
+            var tahta = await _tahtaService.GetAsync(id);
+
+            if (tahta is null)
+            {
+                return NotFound();
+            }
+
+            updatedTahta.Id = tahta.Id;
+
+            await _tahtaService.UpdateAsync(id, updatedTahta);
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var book = await _tahtaService.GetAsync(id);
+
+            if (book is null)
+            {
+                return NotFound();
+            }
+
+            await _tahtaService.RemoveAsync(id);
+
+            return NoContent();
+        }
+
 
         private void TaslarıYerlestir()
         {
@@ -94,9 +186,9 @@ namespace Web.UI.Controllers
             }
         }
 
-        private void TasıHareketEttir(OnClickModel onClickModel)
+        private async Task TasıHareketEttir(OnClickModel onClickModel)
         {
-            Sayac = HttpContext.Session.GetInt32("Sayac") is null ? 0: HttpContext.Session.GetInt32("Sayac");
+            Sayac = HttpContext.Session.GetInt32("Sayac") is null ? 0 : HttpContext.Session.GetInt32("Sayac");
 
             if (Sayac == 0)
             {
@@ -109,16 +201,27 @@ namespace Web.UI.Controllers
                     HttpContext.Session.SetInt32("Sayac", (int)Sayac);
                 }
             }
-            else if (Sayac == 1)
+            else if (Sayac == 1 && !string.IsNullOrEmpty(onClickModel.Id))
             {
                 OncekiKareKoordinat = HttpContext.Session.GetString("OncekiKareKoordinat");
 
-                if (Convert.ToBoolean(onClickModel.KareDolumu) && onClickModel.X.ToString() + onClickModel.Y.ToString() != OncekiKareKoordinat)
+                Kare oncekiKare = Kareler.Where(kare => kare.Koordinat.X.ToString() + kare.Koordinat.Y.ToString() == OncekiKareKoordinat).FirstOrDefault();
+
+                if (oncekiKare.Tas is not null && onClickModel.X.ToString() + onClickModel.Y.ToString() != OncekiKareKoordinat)
                 {
-                    Kare oncekiKare = Kareler.Where(kare => kare.Koordinat.X.ToString() + kare.Koordinat.Y.ToString() == OncekiKareKoordinat).FirstOrDefault();
                     Kare hedefKare = Kareler.Where(kare => kare.Koordinat.X.ToString() + kare.Koordinat.Y.ToString() == onClickModel.X.ToString() + onClickModel.Y.ToString()).FirstOrDefault();
 
                     oncekiKare.Tas.HareketEt(oncekiKare, hedefKare, this.Kareler, oncekiKare.Tas.UygunKareleriHesapla);
+
+                    // TODO: Kareler tas tipi Intreface şu an. Tas tipi class olmalı. Tas tipi class olmayınca jsona çevirirken hata veriyor. Çözüm bulunmalı.
+
+                    var tahtaKoleksiyon = new Tahta
+                    {
+                        Id = onClickModel.Id,
+                        Kareler = JsonConvert.SerializeObject(Kareler)
+                    };
+
+                    await Create(tahtaKoleksiyon);
                 }
 
                 Sayac--;

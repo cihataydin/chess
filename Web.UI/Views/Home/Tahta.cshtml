@@ -1,7 +1,7 @@
 ﻿@using Chess.Rules
 @using Chess.Rules.Sabitler;
 @using Chess.Rules.Taslar;
-@model List<Kare>;
+@model Web.UI.Models.TahtaModel;
 @{
     ViewBag.Title = "StrancTahtası";
 }
@@ -17,7 +17,7 @@
             @for (int j = 1; j < 9; j++)
             {
                 var koordinat = $"{i}{j}";
-                Kare kare = Model.Where(k => k.Koordinat.X == j && k.Koordinat.Y == i).FirstOrDefault();
+                Kare kare = Model.Kareler.Where(k => k.Koordinat.X == j && k.Koordinat.Y == i).FirstOrDefault();
              
                 if (j % 2 == 0)
                 {
@@ -25,12 +25,12 @@
                     {                   
                         if(kare.Tas != null)
                         {
-                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i,'true')" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i,'true', '@Model.Id')" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
 
                         }
                         else
                         {
-                            <img alt="" onclick="onClick(@j,@i,'false')" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <img alt="" onclick="onClick(@j,@i,'false', '@Model.Id')" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
                         }
 
                     }
@@ -38,12 +38,12 @@
                     {
                         if (kare.Tas != null)
                         {
-                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i,'true')" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i,'true', '@Model.Id')" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
 
                         }
                         else
                         {
-                            <img alt="" onclick="onClick(@j,@i,'false')" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <img alt="" onclick="onClick(@j,@i,'false', '@Model.Id')" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
                         }
 
                     }
@@ -54,24 +54,24 @@
                     {
                         if (kare.Tas != null)
                         {
-                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i,'true')" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i,'true', '@Model.Id')" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
 
                         }
                         else
                         {
-                            <img alt="" onclick="onClick(@j,@i,'false')" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <img alt="" onclick="onClick(@j,@i,'false', '@Model.Id')" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
                         }
                     }
                     else
                     {
                         if (kare.Tas != null)
                         {
-                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i,'true')" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i,'true', '@Model.Id')" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
 
                         }
                         else
                         {
-                            <img alt="" onclick="onClick(@j,@i,'false')" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <img alt="" onclick="onClick(@j,@i,'false', '@Model.Id')" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
                         }
 
                     }
