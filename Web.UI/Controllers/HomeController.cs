@@ -117,9 +117,9 @@ namespace Web.UI.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(string id)
         {
-            var book = await _tahtaService.GetAsync(id);
+            var tahta = await _tahtaService.GetAsync(id);
 
-            if (book is null)
+            if (tahta is null)
             {
                 return NotFound();
             }
@@ -212,7 +212,7 @@ namespace Web.UI.Controllers
                     Kare hedefKare = Kareler.Where(kare => kare.Koordinat.X.ToString() + kare.Koordinat.Y.ToString() == onClickModel.X.ToString() + onClickModel.Y.ToString()).FirstOrDefault();
 
                     oncekiKare.Tas.HareketEt(oncekiKare, hedefKare, this.Kareler, oncekiKare.Tas.UygunKareleriHesapla);
-
+                   
                     // TODO: Kareler tas tipi Intreface şu an. Tas tipi class olmalı. Tas tipi class olmayınca jsona çevirirken hata veriyor. Çözüm bulunmalı.
 
                     var tahtaKoleksiyon = new Tahta
@@ -227,5 +227,16 @@ namespace Web.UI.Controllers
                 Sayac--;
             }
         }
+
+        //private void TaslariSinifaCevir()
+        //{
+        //    foreach (var kare in Kareler)
+        //    {
+        //        if (kare.Durum == KareDurum.Dolu)
+        //        {
+        //            kare.Tas = kare.Tas.SınıfaCevir();
+        //        }
+        //    }
+        //}
     }
 }

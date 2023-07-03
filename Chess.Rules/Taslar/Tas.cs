@@ -9,6 +9,7 @@ namespace Chess.Rules.Taslar
 {
     public abstract class Tas
     {
+        public string Isim { get; set; }
         public string Resim { get; set; }
         public Renk Renk { get; set; }
         public bool Oynadı { get; set; }
@@ -33,6 +34,13 @@ namespace Chess.Rules.Taslar
             }
 
             return hareketEdilebilir;
+        }
+
+        public object SınıfaCevir()
+        {
+            Type type = Type.GetType(typeof(Tas).Namespace + "." + Isim);
+
+            return Convert.ChangeType(this, type);
         }
     }
 }

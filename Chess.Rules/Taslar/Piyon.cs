@@ -65,7 +65,7 @@ namespace Chess.Rules.Taslar
                 {
                     if (webmi)
                     {
-                        kare.Tas = new Piyon { Renk = Renk.Beyaz, Resim = $"{TasResimleri.WEB_BEYAZ_PIYON}" };
+                        kare.Tas = new Piyon { Renk = Renk.Beyaz, Resim = $"{TasResimleri.WEB_BEYAZ_PIYON}", Isim = nameof(Piyon) };
                         kare.Resim = $"{TasResimleri.WEB_BEYAZ_PIYON}";
                     }
                     else
@@ -81,7 +81,7 @@ namespace Chess.Rules.Taslar
                 {
                     if (webmi)
                     {
-                        kare.Tas = new Piyon { Renk = Renk.Siyah, Resim = $"{TasResimleri.WEB_SIYAH_PIYON}" };
+                        kare.Tas = new Piyon { Renk = Renk.Siyah, Resim = $"{TasResimleri.WEB_SIYAH_PIYON}", Isim = nameof(Piyon) };
                         kare.Resim = $"{TasResimleri.WEB_SIYAH_PIYON}";
                     }
                     else

@@ -1,3 +1,5 @@
+using Chess.Rules;
+using Chess.Rules.Taslar;
 using Web.UI.Models;
 using Web.UI.Services;
 

@@ -49,7 +49,7 @@ namespace Chess.Rules.Taslar
                 {
                     if (webmi)
                     {
-                        kare.Tas = new At { Renk = Renk.Beyaz, Resim = $"{TasResimleri.WEB_BEYAZ_AT}" };
+                        kare.Tas = new At { Renk = Renk.Beyaz, Resim = $"{TasResimleri.WEB_BEYAZ_AT}", Isim = nameof(At) };
                         kare.Resim = $"{TasResimleri.WEB_BEYAZ_AT}";
                     }
                     else
@@ -64,7 +64,7 @@ namespace Chess.Rules.Taslar
                 {
                     if (webmi)
                     {
-                        kare.Tas = new At { Renk = Renk.Siyah, Resim = $"{TasResimleri.WEB_SIYAH_AT}" };
+                        kare.Tas = new At { Renk = Renk.Siyah, Resim = $"{TasResimleri.WEB_SIYAH_AT}", Isim = nameof(At) };
                         kare.Resim = $"{TasResimleri.WEB_SIYAH_AT}";
                     }
                     else
