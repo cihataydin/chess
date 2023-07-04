@@ -14,10 +14,11 @@ using Web.UI.Services;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net.NetworkInformation;
 
 namespace Web.UI.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : Controller 
     {
         public List<Kare> Kareler { get; set; }
         public string OncekiKareKoordinat { get; set; }
@@ -212,8 +213,10 @@ namespace Web.UI.Controllers
                     Kare hedefKare = Kareler.Where(kare => kare.Koordinat.X.ToString() + kare.Koordinat.Y.ToString() == onClickModel.X.ToString() + onClickModel.Y.ToString()).FirstOrDefault();
 
                     oncekiKare.Tas.HareketEt(oncekiKare, hedefKare, this.Kareler, oncekiKare.Tas.UygunKareleriHesapla);
-                   
+
                     // TODO: Kareler tas tipi Intreface şu an. Tas tipi class olmalı. Tas tipi class olmayınca jsona çevirirken hata veriyor. Çözüm bulunmalı.
+                    CastAll();
+                    TakeBackCastAll();
 
                     var tahtaKoleksiyon = new Tahta
                     {
@@ -238,5 +241,86 @@ namespace Web.UI.Controllers
         //        }
         //    }
         //}
+
+        public void CastAll()
+        {
+
+            List<Kare> kareler = Kareler.Select(t => t).Where(t => t.Tas != null).ToList();
+
+            foreach (var kare in kareler)
+            {
+                switch (kare.Tas.Resim)
+                {
+                    case "Fil":
+                        kare.TasTipleri.Fil = (Fil)kare.Tas;
+
+                        break;
+                    case "Sah":
+                        kare.TasTipleri.Sah = (Sah)kare.Tas;
+
+                        break;
+                    case "At":
+                        kare.TasTipleri.At = (At)kare.Tas;
+
+                        break;
+                    case "Piyon":
+                        kare.TasTipleri.Piyon = (Piyon)kare.Tas;
+
+                        break;
+                    case "Vezir":
+                        kare.TasTipleri.Vezir = (Vezir)kare.Tas;
+
+                        break;
+                    case "Kale":
+                        kare.TasTipleri.At = (At)kare.Tas;
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+
+        }
+
+        public void TakeBackCastAll()
+        {
+            List<Kare> kareler = Kareler.Select(t => t).Where(t => t.TasTipleri.Fil != null || t.TasTipleri.Sah != null || t.TasTipleri.At != null || t.TasTipleri.Piyon != null || t.TasTipleri.Vezir != null || t.TasTipleri.Kale != null).ToList();
+
+            foreach (var kare in kareler)
+            {
+                if (kare.TasTipleri.Fil != null)
+                {
+                    kare.Tas = kare.TasTipleri.Fil;
+                    kare.TasTipleri.Fil = null;
+                }
+                else if (kare.TasTipleri.Sah != null)
+                {
+                    kare.Tas = kare.TasTipleri.Sah;
+                    kare.TasTipleri.Sah = null;
+                }
+                else if (kare.TasTipleri.At != null)
+                {
+                    kare.Tas = kare.TasTipleri.At;
+                    kare.TasTipleri.At = null;
+                }
+                else if (kare.TasTipleri.Piyon != null)
+                {
+                    kare.Tas = kare.TasTipleri.Piyon;
+                    kare.TasTipleri.Piyon = null;
+                }
+                else if (kare.TasTipleri.Vezir != null)
+                {
+                    kare.Tas = kare.TasTipleri.Vezir;
+                    kare.TasTipleri.Vezir = null;
+                }
+                else if (kare.TasTipleri.Kale!= null)
+                {
+                    kare.Tas = kare.TasTipleri.Kale;
+                    kare.TasTipleri.Kale = null;
+                }
+
+            }
+        }
     }
 }

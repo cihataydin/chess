@@ -48,6 +48,7 @@
     <Compile Include="Sabitler\Renk.cs" />
     <Compile Include="Sabitler\TasResimleri.cs" />
     <Compile Include="ITas.cs" />
+    <Compile Include="TasTipleri.cs" />
     <Compile Include="Taslar\At.cs" />
     <Compile Include="Taslar\Fil.cs" />
     <Compile Include="Taslar\Kale.cs" />

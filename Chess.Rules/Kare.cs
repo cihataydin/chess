@@ -1,4 +1,5 @@
 ﻿using Chess.Rules.Sabitler;
+using Chess.Rules.Taslar;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -20,5 +21,9 @@ namespace Chess.Rules
         public Renk Renk { get; set; }
         public Koordinat Koordinat { get; set; }
         public string Resim { get; set; }
+        public TasTipleri TasTipleri { get; set; }
+
+
+
     }
 }
