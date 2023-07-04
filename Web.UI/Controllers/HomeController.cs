@@ -1,20 +1,10 @@
 ﻿using Chess.Rules;
 using Chess.Rules.Taslar;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using Chess.Rules.Sabitler;
-using System.Security.Cryptography.X509Certificates;
-using System.Drawing;
 using Web.UI.Models;
-using static System.Net.Mime.MediaTypeNames;
-using System.Diagnostics.Metrics;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.InteropServices;
 using Web.UI.Services;
-using System.Text.Json.Serialization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Net.NetworkInformation;
 
 namespace Web.UI.Controllers
 {
@@ -54,8 +44,11 @@ namespace Web.UI.Controllers
 
                 if(sonuc is not null)
                 {
-                    // TODO: Interface hatası burada gerçekleşiyor. Deserilize ederken hata alıyor.
-                    TahtaModel = new TahtaModel() { Id = TahtaId, Kareler = JsonConvert.DeserializeObject<List<Kare>>(sonuc.Kareler) };
+                    Kareler = JsonConvert.DeserializeObject<List<Kare>>(sonuc.Kareler);
+
+                    TakeBackCastAll();
+
+                    TahtaModel = new TahtaModel() { Id = TahtaId, Kareler = Kareler };
                 }
                 
             }
@@ -73,11 +66,9 @@ namespace Web.UI.Controllers
             return RedirectToAction("Tahta");
         }
 
-        [HttpGet]
         public async Task<List<Tahta>> Get() =>
         await _tahtaService.GetAsync();
 
-        [HttpGet]
         public async Task<ActionResult<Tahta>> Get(string id)
         {
             var tahta = await _tahtaService.GetAsync(id);
@@ -90,7 +81,6 @@ namespace Web.UI.Controllers
             return tahta;
         }
 
-        [HttpPost]
         public async Task<IActionResult> Create(Tahta newTahta)
         {
             await _tahtaService.CreateAsync(newTahta);
@@ -98,7 +88,6 @@ namespace Web.UI.Controllers
             return CreatedAtAction(nameof(Get), new { id = newTahta.Id }, newTahta);
         }
 
-        [HttpPut]
         public async Task<IActionResult> Update(string id, Tahta updatedTahta)
         {
             var tahta = await _tahtaService.GetAsync(id);
@@ -115,7 +104,6 @@ namespace Web.UI.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
         public async Task<IActionResult> Delete(string id)
         {
             var tahta = await _tahtaService.GetAsync(id);
@@ -129,7 +117,6 @@ namespace Web.UI.Controllers
 
             return NoContent();
         }
-
 
         private void TaslarıYerlestir()
         {
@@ -152,7 +139,6 @@ namespace Web.UI.Controllers
                     Kare kare = new Kare();
                     kare.Koordinat.X = i;
                     kare.Koordinat.Y = j;
-                    // TODO:click olayı eklenmeli.
 
                     if (j % 2 == 0)
                     {
@@ -214,9 +200,7 @@ namespace Web.UI.Controllers
 
                     oncekiKare.Tas.HareketEt(oncekiKare, hedefKare, this.Kareler, oncekiKare.Tas.UygunKareleriHesapla);
 
-                    // TODO: Kareler tas tipi Intreface şu an. Tas tipi class olmalı. Tas tipi class olmayınca jsona çevirirken hata veriyor. Çözüm bulunmalı.
                     CastAll();
-                    TakeBackCastAll();
 
                     var tahtaKoleksiyon = new Tahta
                     {
@@ -224,32 +208,31 @@ namespace Web.UI.Controllers
                         Kareler = JsonConvert.SerializeObject(Kareler)
                     };
 
-                    await Create(tahtaKoleksiyon);
+                    var sonuc = await Get(tahtaKoleksiyon.Id);
+
+                    if(sonuc.Value is not null)
+                    {
+                        await Update(tahtaKoleksiyon.Id, tahtaKoleksiyon);
+                    }
+                    else
+                    {
+                        await Create(tahtaKoleksiyon);
+                    }   
                 }
 
                 Sayac--;
+                HttpContext.Session.SetInt32("Sayac", (int)Sayac);
             }
         }
-
-        //private void TaslariSinifaCevir()
-        //{
-        //    foreach (var kare in Kareler)
-        //    {
-        //        if (kare.Durum == KareDurum.Dolu)
-        //        {
-        //            kare.Tas = kare.Tas.SınıfaCevir();
-        //        }
-        //    }
-        //}
 
         public void CastAll()
         {
 
-            List<Kare> kareler = Kareler.Select(t => t).Where(t => t.Tas != null).ToList();
+            List<Kare> kareler = Kareler.Where(k => k.Durum == KareDurum.Dolu).ToList();
 
             foreach (var kare in kareler)
             {
-                switch (kare.Tas.Resim)
+                switch (kare.Tas.Isim)
                 {
                     case "Fil":
                         kare.TasTipleri.Fil = (Fil)kare.Tas;
@@ -272,20 +255,20 @@ namespace Web.UI.Controllers
 
                         break;
                     case "Kale":
-                        kare.TasTipleri.At = (At)kare.Tas;
+                        kare.TasTipleri.Kale = (Kale)kare.Tas;
 
                         break;
                     default:
                         break;
                 }
+
+                kare.Tas = null;
             }
-
-
         }
 
         public void TakeBackCastAll()
         {
-            List<Kare> kareler = Kareler.Select(t => t).Where(t => t.TasTipleri.Fil != null || t.TasTipleri.Sah != null || t.TasTipleri.At != null || t.TasTipleri.Piyon != null || t.TasTipleri.Vezir != null || t.TasTipleri.Kale != null).ToList();
+            List<Kare> kareler = Kareler.Where(t => t.TasTipleri.Fil != null || t.TasTipleri.Sah != null || t.TasTipleri.At != null || t.TasTipleri.Piyon != null || t.TasTipleri.Vezir != null || t.TasTipleri.Kale != null).ToList();
 
             foreach (var kare in kareler)
             {
@@ -319,7 +302,6 @@ namespace Web.UI.Controllers
                     kare.Tas = kare.TasTipleri.Kale;
                     kare.TasTipleri.Kale = null;
                 }
-
             }
         }
     }

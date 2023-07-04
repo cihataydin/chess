@@ -14,6 +14,7 @@ namespace Chess.Rules
         public Kare()
         {
             Koordinat = new Koordinat();
+            TasTipleri = new TasTipleri();
         }
 
         public ITas Tas { get; set; }
