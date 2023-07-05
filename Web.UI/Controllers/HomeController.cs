@@ -190,12 +190,21 @@ namespace Web.UI.Controllers
             }
             else if (Sayac == 1 && !string.IsNullOrEmpty(onClickModel.Id))
             {
+                var sonuc = await Get(onClickModel.Id);
+
+                if (sonuc.Value is not null)
+                {
+                    Kareler = JsonConvert.DeserializeObject<List<Kare>>(sonuc.Value.Kareler);
+
+                    TakeBackCastAll();
+                }
+
                 OncekiKareKoordinat = HttpContext.Session.GetString("OncekiKareKoordinat");
 
                 Kare oncekiKare = Kareler.Where(kare => kare.Koordinat.X.ToString() + kare.Koordinat.Y.ToString() == OncekiKareKoordinat).FirstOrDefault();
 
                 if (oncekiKare.Tas is not null && onClickModel.X.ToString() + onClickModel.Y.ToString() != OncekiKareKoordinat)
-                {
+                {    
                     Kare hedefKare = Kareler.Where(kare => kare.Koordinat.X.ToString() + kare.Koordinat.Y.ToString() == onClickModel.X.ToString() + onClickModel.Y.ToString()).FirstOrDefault();
 
                     oncekiKare.Tas.HareketEt(oncekiKare, hedefKare, this.Kareler, oncekiKare.Tas.UygunKareleriHesapla);
@@ -207,8 +216,6 @@ namespace Web.UI.Controllers
                         Id = onClickModel.Id,
                         Kareler = JsonConvert.SerializeObject(Kareler)
                     };
-
-                    var sonuc = await Get(tahtaKoleksiyon.Id);
 
                     if(sonuc.Value is not null)
                     {
