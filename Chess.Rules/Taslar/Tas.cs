@@ -31,6 +31,8 @@ namespace Chess.Rules.Taslar
                 hedefKare.Tas = tas;
                 hedefKare.Durum = KareDurum.Dolu;
                 hedefKare.Resim = this.Resim;
+
+                Oynadı = true;
             }
 
             return hareketEdilebilir;
