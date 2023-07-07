@@ -7,13 +7,11 @@
 }
 
 @{
-    int x = 0;
-    int y = 0;
-    string pixel = "{0}px";
-
-    for (int i = 1; i < 9; i++)
-    {
-        <div class="container">
+    <div class="chessboard container">
+        <div class="row">
+            <div class="col-xs-12">
+       @for (int i = 1; i < 9; i++)
+       {
             @for (int j = 1; j < 9; j++)
             {
                 var koordinat = $"{i}{j}";
@@ -25,12 +23,12 @@
                     {                   
                         if(kare.Tas != null)
                         {
-                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i,'true', '@Model.Id')" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <div class="white" onclick="onClick(@j,@i,'true', '@Model.Id')" value=@koordinat>&#@kare.Tas.Resim</div>
 
                         }
                         else
                         {
-                            <img alt="" onclick="onClick(@j,@i,'false', '@Model.Id')" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <div class="white" onclick="onClick(@j,@i,'true', '@Model.Id')" value=@koordinat></div>
                         }
 
                     }
@@ -38,12 +36,12 @@
                     {
                         if (kare.Tas != null)
                         {
-                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i,'true', '@Model.Id')" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <div class="black" onclick="onClick(@j,@i,'true', '@Model.Id')" value=@koordinat>&#@kare.Tas.Resim</div>
 
                         }
                         else
                         {
-                            <img alt="" onclick="onClick(@j,@i,'false', '@Model.Id')" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <div class="black" onclick="onClick(@j,@i,'true', '@Model.Id')" value=@koordinat></div>
                         }
 
                     }
@@ -54,35 +52,32 @@
                     {
                         if (kare.Tas != null)
                         {
-                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i,'true', '@Model.Id')" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <div class="black" onclick="onClick(@j,@i,'true', '@Model.Id')" value=@koordinat>&#@kare.Tas.Resim</div>
 
                         }
                         else
                         {
-                            <img alt="" onclick="onClick(@j,@i,'false', '@Model.Id')" style="border:solid;background-color:black;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <div class="black" onclick="onClick(@j,@i,'true', '@Model.Id')" value=@koordinat></div>
                         }
                     }
                     else
                     {
                         if (kare.Tas != null)
                         {
-                            <img src="@kare.Tas.Resim" onclick="onClick(@j,@i,'true', '@Model.Id')" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <div class="white" onclick="onClick(@j,@i,'true', '@Model.Id')" value=@koordinat>&#@kare.Tas.Resim</div>
 
                         }
                         else
                         {
-                            <img alt="" onclick="onClick(@j,@i,'false', '@Model.Id')" style="border:solid;background-color:white;left:@String.Format(pixel ,x);top:@String.Format(pixel ,y)" value=@koordinat />
+                            <div class="white" onclick="onClick(@j,@i,'true', '@Model.Id')" value=@koordinat></div>
                         }
-
                     }
                 }
-
-                x += 100;
             }
-        </div>
-        y += 100;
-        x = 0;
     }
+            </div> 
+        </div> 
+    </div>  
 }
 
 

@@ -26,13 +26,6 @@ namespace Web.UI.Controllers
 
             _tahtaService = tahtaService;
         }
-        //public IActionResult Tahta()
-        //{
-      
-
-        //    return View();
-        //}
-
 
         public IActionResult Tahta()
         {
@@ -53,7 +46,7 @@ namespace Web.UI.Controllers
                 {
                     Kareler = JsonConvert.DeserializeObject<List<Kare>>(sonuc.Kareler);
 
-                    CastGeriDonustur();
+                    CastGeriAl();
 
                     TahtaModel = new TahtaModel() { Id = TahtaId, Kareler = Kareler };
                 }
@@ -203,7 +196,7 @@ namespace Web.UI.Controllers
                 {
                     Kareler = JsonConvert.DeserializeObject<List<Kare>>(sonuc.Value.Kareler);
 
-                    CastGeriDonustur();
+                    CastGeriAl();
                 }
 
                 OncekiKareKoordinat = HttpContext.Session.GetString("OncekiKareKoordinat");
@@ -216,7 +209,7 @@ namespace Web.UI.Controllers
 
                     oncekiKare.Tas.HareketEt(oncekiKare, hedefKare, this.Kareler, oncekiKare.Tas.UygunKareleriHesapla);
 
-                    CastDonustur();
+                    CastYap();
 
                     var tahtaKoleksiyon = new Tahta
                     {
@@ -239,7 +232,7 @@ namespace Web.UI.Controllers
             }
         }
 
-        public void CastDonustur()
+        public void CastYap()
         {
 
             List<Kare> kareler = Kareler.Where(k => k.Durum == KareDurum.Dolu).ToList();
@@ -280,7 +273,7 @@ namespace Web.UI.Controllers
             }
         }
 
-        public void CastGeriDonustur()
+        public void CastGeriAl()
         {
             List<Kare> kareler = Kareler.Where(t => t.TasTipleri.Fil != null || t.TasTipleri.Sah != null || t.TasTipleri.At != null || t.TasTipleri.Piyon != null || t.TasTipleri.Vezir != null || t.TasTipleri.Kale != null).ToList();
 
