@@ -3,8 +3,6 @@
 
 // Write your JavaScript code.
 
-
-
 function onClick(x, y, karedolumu, id) {
     $.ajax({
         async: false,
