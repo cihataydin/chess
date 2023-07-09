@@ -1,6 +1,9 @@
 using Chess.Rules;
 using Chess.Rules.Taslar;
-using Web.UI.Models;
+using Web.UI.Configuration;
+using Web.UI.Entities.MongoDb;
+using Web.UI.Repositories.Abstract;
+using Web.UI.Repositories.Concrete;
 using Web.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,10 +21,11 @@ builder.Services.AddSession(options =>
 });
 
 // Add services to the container.
-builder.Services.Configure<SatrancDatabaseSettings>(
+builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("SatrancDatabase"));
 
-builder.Services.AddSingleton<TahtaService>();
+builder.Services.AddScoped<TahtaService>();
+builder.Services.AddSingleton(typeof(IMongoDbRepository<TahtaEntity>), typeof(MongoDbRepository<TahtaEntity>));
 
 var app = builder.Build();
 
@@ -42,7 +46,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Tahta}/{id?}");
+    pattern: "{controller=Satranc}/{action=Tahta}/{id?}");
 
 app.UseSession();
 

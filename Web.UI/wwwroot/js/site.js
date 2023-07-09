@@ -6,7 +6,7 @@
 function onClick(x, y, karedolumu, id) {
     $.ajax({
         async: false,
-        url: '/Home/OnClick',
+        url: '/Satranc/OnClick',
         data: { X: x, Y: y, KareDolumu: karedolumu, Id: id },
         method: "POST",
         //contentType: "application/json;charset=utf-8",

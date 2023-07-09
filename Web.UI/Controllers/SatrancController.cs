@@ -5,10 +5,11 @@ using Chess.Rules.Sabitler;
 using Web.UI.Models;
 using Web.UI.Services;
 using Newtonsoft.Json;
+using Web.UI.Entities.MongoDb;
 
 namespace Web.UI.Controllers
 {
-    public class HomeController : Controller 
+    public class SatrancController : Controller 
     {
         public List<Kare> Kareler { get; set; }
         public string OncekiKareKoordinat { get; set; }
@@ -18,7 +19,7 @@ namespace Web.UI.Controllers
         public TahtaModel TahtaModel { get; set; }
 
         private readonly TahtaService _tahtaService;
-        public HomeController(TahtaService tahtaService)
+        public SatrancController(TahtaService tahtaService)
         {
             Kareler = new List<Kare>();
             KareleriYarat();
@@ -27,7 +28,7 @@ namespace Web.UI.Controllers
             _tahtaService = tahtaService;
         }
 
-        public IActionResult Tahta()
+        public async Task<IActionResult> Tahta()
         {
             TahtaId = HttpContext.Session.GetString("TahtaId");
 
@@ -40,11 +41,11 @@ namespace Web.UI.Controllers
             }
             else
             {
-                var sonuc = Get(TahtaId).Result.Value;
+                var tahta = await _tahtaService.GetAsync(TahtaId);
 
-                if(sonuc is not null)
+                if(tahta is not null)
                 {
-                    Kareler = JsonConvert.DeserializeObject<List<Kare>>(sonuc.Kareler);
+                    Kareler = JsonConvert.DeserializeObject<List<Kare>>(tahta.Kareler);
 
                     CastGeriAl();
 
@@ -64,58 +65,6 @@ namespace Web.UI.Controllers
             await TasıHareketEttir(onClickModel);
 
             return RedirectToAction("Tahta");
-        }
-
-        public async Task<List<Tahta>> Get() =>
-        await _tahtaService.GetAsync();
-
-        public async Task<ActionResult<Tahta>> Get(string id)
-        {
-            var tahta = await _tahtaService.GetAsync(id);
-
-            if (tahta is null)
-            {
-                return NotFound();
-            }
-
-            return tahta;
-        }
-
-        public async Task<IActionResult> Create(Tahta newTahta)
-        {
-            await _tahtaService.CreateAsync(newTahta);
-
-            return CreatedAtAction(nameof(Get), new { id = newTahta.Id }, newTahta);
-        }
-
-        public async Task<IActionResult> Update(string id, Tahta updatedTahta)
-        {
-            var tahta = await _tahtaService.GetAsync(id);
-
-            if (tahta is null)
-            {
-                return NotFound();
-            }
-
-            updatedTahta.Id = tahta.Id;
-
-            await _tahtaService.UpdateAsync(id, updatedTahta);
-
-            return NoContent();
-        }
-
-        public async Task<IActionResult> Delete(string id)
-        {
-            var tahta = await _tahtaService.GetAsync(id);
-
-            if (tahta is null)
-            {
-                return NotFound();
-            }
-
-            await _tahtaService.RemoveAsync(id);
-
-            return NoContent();
         }
 
         private void TaslarıYerlestir()
@@ -190,11 +139,11 @@ namespace Web.UI.Controllers
             }
             else if (Sayac == 1 && !string.IsNullOrEmpty(onClickModel.Id))
             {
-                var sonuc = await Get(onClickModel.Id);
+                var tahta = await _tahtaService.GetAsync(onClickModel.Id);
 
-                if (sonuc.Value is not null)
+                if (tahta is not null)
                 {
-                    Kareler = JsonConvert.DeserializeObject<List<Kare>>(sonuc.Value.Kareler);
+                    Kareler = JsonConvert.DeserializeObject<List<Kare>>(tahta.Kareler);
 
                     CastGeriAl();
                 }
@@ -211,19 +160,19 @@ namespace Web.UI.Controllers
 
                     CastYap();
 
-                    var tahtaKoleksiyon = new Tahta
+                    var tahtaKoleksiyon = new TahtaEntity
                     {
                         Id = onClickModel.Id,
                         Kareler = JsonConvert.SerializeObject(Kareler)
                     };
 
-                    if(sonuc.Value is not null)
+                    if(tahta is not null)
                     {
-                        await Update(tahtaKoleksiyon.Id, tahtaKoleksiyon);
+                        await _tahtaService.UpdateAsync(tahtaKoleksiyon.Id, tahtaKoleksiyon);
                     }
                     else
                     {
-                        await Create(tahtaKoleksiyon);
+                        await _tahtaService.CreateAsync(tahtaKoleksiyon);
                     }   
                 }
 

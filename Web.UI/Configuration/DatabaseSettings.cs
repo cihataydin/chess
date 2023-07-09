@@ -1,11 +1,11 @@
-﻿namespace Web.UI.Models
+﻿namespace Web.UI.Configuration
 {
-    public class SatrancDatabaseSettings
+    public class DatabaseSettings
     {
         public string ConnectionString { get; set; } = null!;
 
         public string DatabaseName { get; set; } = null!;
 
-        public string TahtaCollectionName { get; set; } = null!;
+        public string CollectionName { get; set; } = null!;
     }
 }
