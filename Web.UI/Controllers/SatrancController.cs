@@ -28,6 +28,7 @@ namespace Web.UI.Controllers
             _tahtaService = tahtaService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Tahta()
         {
             TahtaId = HttpContext.Session.GetString("TahtaId");
