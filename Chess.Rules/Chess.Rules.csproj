@@ -44,7 +44,7 @@
     <Compile Include="Kare.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sabitler\KareDurum.cs" />
-    <Compile Include="Sabitler\Koordinat.cs" />
+    <Compile Include="Koordinat.cs" />
     <Compile Include="Sabitler\Renk.cs" />
     <Compile Include="Sabitler\TasResimleri.cs" />
     <Compile Include="ITas.cs" />
