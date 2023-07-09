@@ -28,10 +28,10 @@ namespace Desktop.UI
             Butonlar = new List<Button>();
             InitializeComponent();
             TahtayıYarat();
-            TaslarıYarat();
+            TaslarıYerlestir();
         }
         
-        private void TaslarıYarat()
+        private void TaslarıYerlestir()
         {
             Kale.Yerlestir(this.Kareler);
             Fil.Yerlestir(this.Kareler); 

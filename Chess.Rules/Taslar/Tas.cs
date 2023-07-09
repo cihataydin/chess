@@ -37,12 +37,5 @@ namespace Chess.Rules.Taslar
 
             return hareketEdilebilir;
         }
-
-        public object SınıfaCevir()
-        {
-            Type type = Type.GetType(typeof(Tas).Namespace + "." + Isim);
-
-            return Convert.ChangeType(this, type);
-        }
     }
 }

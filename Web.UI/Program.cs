@@ -18,8 +18,7 @@ builder.Services.AddSession(options =>
 });
 
 // Add services to the container.
-builder.Services.Configure<SatrancDatabaseSettings>(
-    builder.Configuration.GetSection("SatrancDatabase"));
+builder.Services.Configure<SatrancDatabaseSettings>(builder.Configuration.GetSection("SatrancDatabase"));
 
 builder.Services.AddSingleton<TahtaService>();
 
