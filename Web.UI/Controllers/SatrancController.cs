@@ -181,7 +181,7 @@ namespace Web.UI.Controllers
             }
         }
 
-        public void CastYap()
+        private void CastYap()
         {
 
             List<Kare> kareler = Kareler.Where(k => k.Durum == KareDurum.Dolu).ToList();
@@ -222,7 +222,7 @@ namespace Web.UI.Controllers
             }
         }
 
-        public void CastGeriAl()
+        private void CastGeriAl()
         {
             List<Kare> kareler = Kareler.Where(t => t.TasTipleri.Fil != null || t.TasTipleri.Sah != null || t.TasTipleri.At != null || t.TasTipleri.Piyon != null || t.TasTipleri.Vezir != null || t.TasTipleri.Kale != null).ToList();
 
