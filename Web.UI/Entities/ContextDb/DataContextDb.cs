@@ -6,9 +6,9 @@ namespace Web.UI.Entities.ContextDb
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server =localhost; Database = Users; integrated Security = true");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=Users;Integrated Security=true;TrustServerCertificate=True");
         }
 
-        public DbSet<Users> Users { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }
