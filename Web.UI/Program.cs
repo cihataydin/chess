@@ -21,7 +21,7 @@ builder.Services.AddSession(options =>
 });
 
 // Add services to the container.
-builder.Services.Configure<SatrancDatabaseSettings>(builder.Configuration.GetSection("SatrancDatabase"));
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("SatrancDatabase"));
 
 builder.Services.AddScoped<TahtaService>();
 builder.Services.AddSingleton(typeof(IMongoDbRepository<TahtaEntity>), typeof(MongoDbRepository<TahtaEntity>));
@@ -31,7 +31,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Satranc/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -45,7 +45,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Satranc}/{action=Tahta}/{id?}");
+    pattern: "{controller=Transactions}/{action=Login}/{id?}");
 
 app.UseSession();
 

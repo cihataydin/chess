@@ -60,6 +60,12 @@ namespace Web.UI.Controllers
             return View(TahtaModel);
         }
 
+        [HttpGet]
+        public IActionResult Error()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> OnClick(OnClickModel onClickModel)
         {
